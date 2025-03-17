@@ -18,7 +18,7 @@ if (!isset($_SESSION['loginId'])) {
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <!-- Google Fonts -->
     <link href="./assets/css/swap.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!--`` Font Awesome -->
     <link href="./assets/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@ if (!isset($_SESSION['loginId'])) {
 
 <body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border">
 
-    <!-- Left Sidebar -->
+    <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav
         class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
         <div class="flex items-center space-x-3">
@@ -41,8 +41,12 @@ if (!isset($_SESSION['loginId'])) {
                 ?>
             </div>
             <div>
-                <p class="font-bold text-white"><?php echo ($_SESSION['loginuserData']['name']) ?></p>
-                <p class=" text-gray-300"><?php echo ($_SESSION['loginuserData']['mobileno']) ?></p>
+                <p class="font-bold text-white">
+                    <?php echo ($_SESSION['loginuserData']['name']) ?>
+                </p>
+                <p class=" text-gray-300">
+                    <?php echo ($_SESSION['loginuserData']['mobileno']) ?>
+                </p>
             </div>
         </div>
         <!-- <input class=" w-72 p-2 bg-white text-white placeholder-gray-300 focus:ring focus:ring-teal-500 " type="text"
