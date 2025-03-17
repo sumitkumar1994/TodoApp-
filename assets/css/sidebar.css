@@ -1,0 +1,44 @@
+/* Applying green-themed styling */
+body {
+  background: linear-gradient(
+    135deg,
+    #2ecc71,
+    #218c74,
+    #27ae60,
+    #218c74
+  ) !important;
+  color: white !important;
+}
+
+.bg-white {
+  background-color: #218c74 !important;
+}
+
+.btn-outline-primary {
+  border-color: #1abc9c !important;
+  color: #1abc9c !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #1abc9c !important;
+  color: white !important;
+}
+
+.btn-danger {
+  background-color: #e74c3c !important;
+}
+
+.nav-item {
+  color: white !important;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 5px !important;
+}
+
+.input-group-text {
+  background-color: #1abc9c !important;
+  color: white !important;
+  border: none !important;
+}

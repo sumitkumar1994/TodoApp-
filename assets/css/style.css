@@ -1,0 +1,189 @@
+/* Container for the checkbox, */
+/* centered both horizontally and vertically  */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%; /* Takes up half the height of its parent */
+  margin: 0; /* No margin */
+}
+
+/* Hide the actual checkbox input */
+.checkbox {
+  display: none;
+}
+
+/* Label for the checkbox, used to style the custom checkbox */
+.checkbox-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer; /* Indicates the label is clickable */
+}
+
+/* Container for the flip animation */
+.checkbox-flip {
+  width: 60px;
+  height: 60px;
+  perspective: 1000px; /* Adds 3D perspective for the flip effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: transform 0.4s ease; /* Smooth transition for scaling */
+}
+
+/* Front and back faces of the flip animation */
+.checkbox-front,
+.checkbox-back {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px; /* Rounded corners */
+  backface-visibility: hidden; /* Hides the back face when flipped */
+  transition: transform 0.3s ease; /* Smooth transition for flipping */
+}
+
+/* Front face styling */
+.checkbox-front {
+  background: linear-gradient(
+    135deg,
+    #ff6347,
+    #f76c6c
+  ); /* Gradient background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transform: rotateY(0deg); /* Initial rotation */
+}
+
+/* Back face styling */
+.checkbox-back {
+  background: linear-gradient(
+    135deg,
+    #36b54a,
+    #00c1d4
+  ); /* Gradient background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transform: rotateY(180deg); /* Initial rotation (hidden) */
+}
+
+/* Scale up the flip container on hover */
+.checkbox-wrapper:hover .checkbox-flip {
+  transform: scale(1.1); /* Slightly larger */
+  transition: transform 0.4s ease-out; /* Smooth scaling */
+}
+
+/* Flip animation when the checkbox is checked */
+.checkbox:checked + .checkbox-label .checkbox-front {
+  transform: rotateY(180deg); /* Rotate front face to hide */
+}
+
+.checkbox:checked + .checkbox-label .checkbox-back {
+  transform: rotateY(0deg); /* Rotate back face to show */
+}
+
+/* Add a glowing effect when the checkbox is focused */
+.checkbox:focus + .checkbox-label .checkbox-flip {
+  box-shadow: 0 0 15px rgba(54, 181, 73, 0.7), 0 0 20px rgba(0, 193, 212, 0.4); /* Glow effect */
+  transition: box-shadow 0.3s ease; /* Smooth transition for glow */
+}
+
+/* Styling for icons inside the checkbox */
+.icon-path {
+  stroke: white; /* White stroke for icons */
+  stroke-width: 2; /* Stroke thickness */
+  fill: transparent; /* No fill */
+}
+
+/* Scrollbar styling for the task list container */
+#taskListContainer {
+  height: 80vh !important; /*Maximum height before scrolling*/
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 1px; /* Small padding */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Custom scrollbar width and track */
+#taskListContainer::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+#taskListContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray track */
+  border-radius: 10px; /* Rounded track */
+}
+
+/* Custom scrollbar thumb */
+#taskListContainer::-webkit-scrollbar-thumb {
+  background: #52a6ac; /* Default thumb color */
+  border-radius: 10px; /* Rounded thumb */
+}
+
+/* Hover effect for the scrollbar thumb */
+#taskListContainer::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Blue color on hover */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  ); /* Gradient on hover */
+}
+
+/* Task item styling */
+.task-item {
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for task items */
+.task-item:hover {
+  background: #f8f9fa;
+  color: black; /* Light gray background on hover */
+}
+
+/* Styling for the important icon */
+.important-icon {
+  cursor: pointer; /* Indicates the icon is clickable */
+}
+
+/* Hover effect for the delete button */
+.delete-btn:hover {
+  background: #dc3545; /* Red background on hover */
+  color: white; /* White text on hover */
+}
+
+/* Slightly larger checkbox for tasks */
+.task-checkbox {
+  transform: scale(1.2); /* Scale up the checkbox */
+}
+/* new list scrool bar........................................................ */
+
+/* Custom Scrollbar for .custom-lists */
+.custom-lists::-webkit-scrollbar {
+  width: 4px; /* Thin scrollbar */
+}
+
+.custom-lists::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  border-radius: 10px;
+}
+
+.custom-lists::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
+}
+
+.custom-lists::-webkit-scrollbar-track {
+  background: transparent; /* No track visible */
+}

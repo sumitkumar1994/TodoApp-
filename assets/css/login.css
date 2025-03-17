@@ -1,0 +1,102 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #2ecc71,
+    #218c74,
+    #27ae60,
+    #218c74
+  ) !important;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: #fff transparent;
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-card h2 a {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #121312 !important;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 12px 20px;
+}
+
+.btn-primary {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  width: 100%;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #218c74 !important;
+}
+
+.text-muted a {
+  color: #232a24;
+  text-decoration: none;
+}
+
+.text-muted a:hover {
+  text-decoration: underline;
+}
+
+/* add new code */
+.btn-custom-login {
+  transition: all 0.3s ease-in-out;
+}
+.btn-custom-login:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 4px 10px rgba(0, 86, 179, 0.5);
+}
+.btn-custom-signup {
+  transition: all 0.3s ease-in-out;
+  border-color: #28a745;
+  color: #28a745;
+}
+.btn-custom-signup:hover {
+  background-color: #28a745;
+  color: #fff;
+  box-shadow: 0px 4px 10px rgba(40, 167, 69, 0.5);
+}
+.btn-custom-logout {
+  transition: all 0.3s ease-in-out;
+}
+.btn-custom-logout:hover {
+  background-color: #c82333;
+  box-shadow: 0px 4px 10px rgba(200, 35, 51, 0.5);
+}
+
+.btn-login {
+  background-color: #4caf50 !important;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  width: 100%;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+/* login error animation */
+.border-danger {
+  border: 2px solid red;
+  box-shadow: 0px 0px 8px red;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
