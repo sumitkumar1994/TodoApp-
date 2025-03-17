@@ -31,7 +31,7 @@ if (!isset($_SESSION['loginId'])) {
 
 <body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border">
 
-    <!-- Left Sidebar --------------------------------------------------------------------------->
+    <!-- Left Sidebar ---------------------------------------------------------------------------`>
     <nav
         class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
         <div class="flex items-center space-x-3">
@@ -51,86 +51,86 @@ if (!isset($_SESSION['loginId'])) {
         </div>
         <!-- <input class=" w-72 p-2 bg-white text-white placeholder-gray-300 focus:ring focus:ring-teal-500 " type="text"
             placeholder="Search"> -->
-        <input
-            class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
-            type="text" placeholder="Search">
+    <input
+        class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
+        type="text" placeholder="Search">
 
-        <ul class="space-y-2 defaultList">
-            <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                    class="fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
-            <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                    class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
-            <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                    class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
-            <li class="p-2  hover:bg-teal-500 cursor-pointer  flex items-center mr-2"><i
-                    class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
-            <li class="p-2    hover:bg-teal-500 cursor-pointer  flex items-center mr-2">
-                <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
-            </li>
-        </ul>
-        <hr>
-        <!-- Scrollable List -->
-        <input type="hidden" class="activeInput">
-        <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
+    <ul class="space-y-2 defaultList">
+        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
+                class="fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
+        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
+                class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
+        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
+                class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
+        <li class="p-2  hover:bg-teal-500 cursor-pointer  flex items-center mr-2"><i
+                class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
+        <li class="p-2    hover:bg-teal-500 cursor-pointer  flex items-center mr-2">
+            <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
+        </li>
+    </ul>
+    <hr>
+    <!-- Scrollable List -->
+    <input type="hidden" class="activeInput">
+    <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
         scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-transparent 
         hover:scrollbar-thumb-teal-500">
-        </ul>
-        <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
+    </ul>
+    <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
             <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
         </li> -->
+    </ul>
+
+    <!-- untitlelist contestmenu......................................................... -->
+
+    <div id="listcontextMenu"
+        class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
+        <ul class="text-gray-800 font-medium">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
+                <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
+            </li>
         </ul>
-
-        <!-- untitlelist contestmenu......................................................... -->
-
-        <div id="listcontextMenu"
-            class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
-            <ul class="text-gray-800 font-medium">
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
-                    <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
-                </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
-                </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
-                </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
-                </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
-                </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
-                </li>
-            </ul>
-            <div class="border-t border-gray-400 mt-1 pt-1">
-                <li type="submit"
-                    class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
-                    <i class="fa-solid fa-trash mr-3"></i> Delete list
-                </li>
-            </div>
+        <div class="border-t border-gray-400 mt-1 pt-1">
+            <li type="submit"
+                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
+                <i class="fa-solid fa-trash mr-3"></i> Delete list
+            </li>
         </div>
-        <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
+    </div>
+    <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
             id="new-list-btn">
             <i class="fas fa-plus mr-2"></i> New List
         </button> -->
-        <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
+    <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
             transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
             border border-white/20 backdrop-blur-xl overflow-hidden mr-2 flex items-center justify-center"
-            id="new-list-btn">
-            <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
-            <span class="relative flex items-center justify-center space-x-2">
-                <i class="fas fa-plus text-lg"></i>
-                <span>New List</span>
-            </span>
-        </button>
+        id="new-list-btn">
+        <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
+        <span class="relative flex items-center justify-center space-x-2">
+            <i class="fas fa-plus text-lg"></i>
+            <span>New List</span>
+        </span>
+    </button>
 
 
 
