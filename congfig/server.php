@@ -199,6 +199,7 @@ if (isset($_POST["taskBtn"])) {
     $checkapi = 0;
     $task = $_POST["task"] ?? '';
     $userid = $_POST['userid'] ?? '';
+    $activeListId = $_POST["activeListId"] ?? '';
     $errorcount = 0;
     // $returndata = [];
     $returndata["success"] = false;
@@ -218,10 +219,10 @@ if (isset($_POST["taskBtn"])) {
 
     }
     if ($errorcount == 0) {
-        $Sql = "INSERT INTO tasks (task_name,created_by,updated_by)values('$task','$userid','$userid')";
+        $Sql = "INSERT INTO tasks (task_name,list_id,created_by,updated_by)values('$task', '$activeListId','$userid','$userid')";
         $result = mysqli_query($conn, $Sql);
         if ($result) {
-            $fetch_sql = "SELECT * FROM tasks where  created_by ='$userid' ORDER BY id DESC";
+            $fetch_sql = "SELECT * FROM tasks where  created_by ='$userid' AND list_id ='$activeListId' ORDER BY id DESC";
             $fetch_result = mysqli_query($conn, $fetch_sql);
             if ($fetch_result) {
                 $data = [];
@@ -242,7 +243,18 @@ if (isset($_POST["taskBtn"])) {
 if (isset($_POST["getdata"])) {
     $checkapi = 0;
     $returndata['success'] = false;
-    $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]' ORDER BY id DESC";
+    // $where = " AND (list_id = 'MyDAY' OR important = 1)";   
+    $where = '';
+    $id = $_POST['id'];
+    if (isset($_POST['id'])) {
+        if ($id == "important") {
+            $where = "and important='1'";
+        } else {
+
+            $where = "and list_id= '$id'";
+        }
+    }
+    $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]'$where ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $data = [];
@@ -471,26 +483,33 @@ if (isset($_POST['renamelist'])) {
     echo json_encode($returndata, true);
 }
 
-if (isset($_POST["getDefaultList"])) {
+if (isset($_POST['isImportant'])) {
     $checkapi = 0;
+    $id = $_POST['id'] ?? '';
+    $important = $_POST['important'] ?? '';
     $returndata['success'] = false;
-    $sql = "SELECT id,list_name,icon_class FROM lists where is_default ='1'  ";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        $data = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
+    if ($important == 1) {
 
-        }
-        $returndata['defaultList'] = $data;
-        $returndata['success'] = true;
-        $returndata['msg'] = 'data found';
-
+        $query = "UPDATE tasks SET important = ' 1' WHERE id = $id";
     } else {
-        $returndata['msg'] = 'data not found';
+        $query = "UPDATE tasks SET important = ' 0' WHERE id = $id";
+
+    }
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+
+        $returndata["success"] = true;
+        $returndata['msg'] = "Task $id marked  important successfully.";
+        $returndata["important"] = $important;
+    } else {
+        $returndata['msg'] = "Task $id has been removed from Important successfully ";
+
     }
     echo json_encode($returndata, true);
 }
+
+
 
 
 if ($checkapi) {

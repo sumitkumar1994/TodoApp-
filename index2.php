@@ -28,10 +28,17 @@ if (!isset($_SESSION['loginId'])) {
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
+<!-- <style>
+    .activeList {
+        background-color: lightgrey;
+        color: white;
+        font-weight: bold;
+    }
+</style> -->
 
 <body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border">
 
-    <!-- Left Sidebar ---------------------------------------------------------------------------`>
+    <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav
         class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
         <div class="flex items-center space-x-3">
@@ -49,88 +56,87 @@ if (!isset($_SESSION['loginId'])) {
                 </p>
             </div>
         </div>
-        <!-- <input class=" w-72 p-2 bg-white text-white placeholder-gray-300 focus:ring focus:ring-teal-500 " type="text"
-            placeholder="Search"> -->
-    <input
-        class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
-        type="text" placeholder="Search">
 
-    <ul class="space-y-2 defaultList">
-        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                class="fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
-        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
-        <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"><i
-                class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
-        <li class="p-2  hover:bg-teal-500 cursor-pointer  flex items-center mr-2"><i
-                class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
-        <li class="p-2    hover:bg-teal-500 cursor-pointer  flex items-center mr-2">
-            <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
-        </li>
-    </ul>
-    <hr>
-    <!-- Scrollable List -->
-    <input type="hidden" class="activeInput">
-    <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
-        scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-transparent 
-        hover:scrollbar-thumb-teal-500">
-    </ul>
-    <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
-            <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
-        </li> -->
-    </ul>
+        <input
+            class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
+            type="text" placeholder="Search">
 
-    <!-- untitlelist contestmenu......................................................... -->
-
-    <div id="listcontextMenu"
-        class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
-        <ul class="text-gray-800 font-medium">
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
-                <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
-            </li>
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
-                <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
-            </li>
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
-                <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
-            </li>
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
-                <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
-            </li>
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
-                <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
-            </li>
-            <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
-                <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
+        <ul class="space-y-2 ">
+            <li class="p-2 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
+                data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
+            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important"><i
+                    class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
+            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="planned"><i
+                    class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
+            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned"><i
+                    class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
+            <li class="p-2 defaultList hover:bg-teal-600  cursor-pointer  flex items-center mr-2" data-id="Tasks">
+                <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
             </li>
         </ul>
-        <div class="border-t border-gray-400 mt-1 pt-1">
-            <li type="submit"
-                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
-                <i class="fa-solid fa-trash mr-3"></i> Delete list
-            </li>
+        <hr>
+        <!-- Scrollable List -->
+        <input type="hidden" class="activeInput">
+        <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
+        scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-transparent 
+        hover:scrollbar-thumb-teal-500">
+        </ul>
+        <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
+            <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
+        </li> -->
+        </ul>
+
+        <!-- untitlelist contestmenu......................................................... -->
+
+        <div id="listcontextMenu"
+            class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
+            <ul class="text-gray-800 font-medium">
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
+                    <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
+                </li>
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
+                </li>
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
+                </li>
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
+                </li>
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
+                </li>
+                <li
+                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
+                </li>
+            </ul>
+            <div class="border-t border-gray-400 mt-1 pt-1">
+                <li type="submit"
+                    class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
+                    <i class="fa-solid fa-trash mr-3"></i> Delete list
+                </li>
+            </div>
         </div>
-    </div>
-    <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
+        <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
             id="new-list-btn">
             <i class="fas fa-plus mr-2"></i> New List
         </button> -->
-    <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
+        <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
             transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
             border border-white/20 backdrop-blur-xl overflow-hidden mr-2 flex items-center justify-center"
-        id="new-list-btn">
-        <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
-        <span class="relative flex items-center justify-center space-x-2">
-            <i class="fas fa-plus text-lg"></i>
-            <span>New List</span>
-        </span>
-    </button>
+            id="new-list-btn">
+            <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
+            <span class="relative flex items-center justify-center space-x-2">
+                <i class="fas fa-plus text-lg"></i>
+                <span>New List</span>
+            </span>
+        </button>
 
 
 
@@ -259,41 +265,53 @@ if (!isset($_SESSION['loginId'])) {
 
     <script>
         $(document).ready(function () {
-            getTasks();
-            listDataRender();
-            renderDefaultList();
+            let activeListId = $(".activeList").data("id")
+            // alert(activeListId);
+            getTasks(activeListId);
 
-            $(document).on("click", "#taskBtn", function (e) {
-                e.preventDefault();
-                let task = $('#task').val().trim();
-                let error = 0;
-                if (task === '') {
+            listDataRender();
+            // renderDefaultList();
+        })
+
+
+        $(document).on("click", "#taskBtn", function (e) {
+            e.preventDefault();
+            let task = $('#task').val().trim();
+            // alert(task);
+            // return false;
+            let error = 0;
+            if (task === '') {
+                $('#task').css({
+                    'border': '2px solid red',
+                    'box-shadow': '0px 0px 8px red',
+                    'border-radius': '5px',
+                    'transition': 'all 0.3s ease-in-out'
+                });
+                error++;
+            }
+            $(document).on("keyup", "#task", function (e) {
+                if ($(this).val() !== '') {
                     $('#task').css({
-                        'border': '2px solid red',
-                        'box-shadow': '0px 0px 8px red',
-                        'border-radius': '5px',
+                        'border': '',
+                        'box-shadow': '',
+                        'border-radius': '',
                         'transition': 'all 0.3s ease-in-out'
                     });
-                    error++;
                 }
-                $(document).on("keyup", "#task", function (e) {
-                    if ($(this).val() !== '') {
-                        $('#task').css({
-                            'border': '',
-                            'box-shadow': '',
-                            'border-radius': '',
-                            'transition': 'all 0.3s ease-in-out'
-                        });
-                    }
-                })
+            })
 
-                if (error === 0) {
-                    let form = $('#task_form');
-                    let url = form.attr('action');
+            if (error === 0) {
+                let form = $('#task_form');
+                let url = form.attr('action');
+                let activeListId = $(".activeList").data("id")
+
+                let formData = form.serialize();
+                formData += "&activeListId=" + activeListId,
+
                     $.ajax({
                         url: url,
                         type: 'POST',
-                        data: form.serialize(),
+                        data: formData,
                         success: function (response) {
                             let arr = JSON.parse(response);
                             console.log(arr);
@@ -305,15 +323,21 @@ if (!isset($_SESSION['loginId'])) {
                             $('#task').val('');
                         }
                     })
-                }
-            })
+            }
         })
-        function getTasks() {
+        function getTasks(id = "") {
+            let request = {
+                getdata: true
+            }
+            if (id != "") {
+                request.id = id
+                // console.log(request.Id)
+            }
 
             $.ajax({
                 url: "./congfig/server.php",
                 type: "post",
-                data: { getdata: true },
+                data: request,
                 success: function (response) {
                     let arr = JSON.parse(response);
 
@@ -327,11 +351,86 @@ if (!isset($_SESSION['loginId'])) {
             });
         }
 
+        function rander(getTaskList) {
+            $('#taskListContainer').empty();
+            let html = "";
+
+            getTaskList.forEach(element => {
+                let isimp = "text-gray-400"
+                if (element.important == "1") {
+                    isimp = "text-yellow-500"
+                }
+                html += `
+                        
+                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3  removeImp${element.id}  rightClick"  >
+                        <div class="flex items-center space-x-3 max-w-xs"data-id="${element.id}">
+                            <input type="checkbox" class="w-4 h-4    ">
+                            <span class="flex-grow text-lg text-gray-900 font-[5px]">${element.task_name}</span>
+                        </div>
+                            
+                        <div class="flex items-center space-x-2">
+                                <span class="${isimp} text-lg star isImp${element.id}  "data-id="${element.id}" data-imp="${element.important}"><i class="fas fa-star"></i></span>
+                        </div>
+                                
+                        <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
+                                    border border-gray-300 transition-all duration-200 ease-in-out">
+                            
+                            <ul class="text-gray-800 font-medium">
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
+                                </li>
+                                
+                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                                    <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
+                                </li>
+                            </ul>
+                            
+                            <div class="border-t border-gray-400 mt-1 pt-1">
+                                <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
+                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300" 
+                                    id="delete-btn" data-id="${element.id}">
+                                    <i class="fa-solid fa-trash mr-3"></i> Delete Task
+                                </li>
+                            </div>
+                        </div>
+                        
+                </div>  `;
+            });
+
+            $('#taskListContainer').append(html);
+            // scrollToTop();
+        }
         function scrollToTop() {
             let container = $('#taskListContainer');
             container.scrollTop(0);
         }
-
         // deletetask function with ajax................................
         // $(document).on("click", "#delete-btn", function () {
         //     let taskid = $(this).data("id");
@@ -400,81 +499,6 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
-
-
-        function rander(getTaskList) {
-            $('#taskListContainer').empty();
-            let html = "";
-
-            getTaskList.forEach(element => {
-                html += `
-                        
-                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3    rightClick" >
-                        <div class="flex items-center space-x-3 max-w-xs">
-                            <input type="checkbox" class="w-4 h-4    ">
-                            <span class="flex-grow text-lg text-gray-900 font-[5px]">${element.task_name}</span>
-                        </div>
-                            
-                    <div class="flex items-center space-x-2">
-                            <span class="text-yellow-400 text-lg"><i class="fas fa-star"></i></span>
-                            
-                        <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
-                                    border border-gray-300 transition-all duration-200 ease-in-out">
-                            
-                            <ul class="text-gray-800 font-medium">
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
-                                </li>
-                            </ul>
-                            
-                            <div class="border-t border-gray-400 mt-1 pt-1">
-                                <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
-                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300" 
-                                    id="delete-btn" data-id="${element.id}">
-                                    <i class="fa-solid fa-trash mr-3"></i> Delete Task
-                                </li>
-                            </div>
-                        </div>
-                    </div>
-                        
-                </div>  `;
-            });
-
-            $('#taskListContainer').append(html);
-            // scrollToTop();
-        }
-
         // right sidebar logic ...................................................................................
 
         $(document).on('click', '.sidebar', function (e) {
@@ -497,7 +521,7 @@ if (!isset($_SESSION['loginId'])) {
         });
 
         // **Checkbox aur delete button click pe sidebar event na ho**
-        $(document).on('click', 'input[type="checkbox"], #delete-btn', function (e) {
+        $(document).on('click', 'input[type="checkbox"], .star', function (e) {
             e.stopPropagation();
         });
 
@@ -563,7 +587,6 @@ if (!isset($_SESSION['loginId'])) {
         });
 
         // add new list ......................................................
-
         $(document).on('click', '#new-list-btn', function () {
             $.ajax({
                 url: "./congfig/server.php",
@@ -609,7 +632,6 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         }
-
         function renderlist(data, isInput = '') {
             // console.log(data);
             if (isInput == 1) {
@@ -663,10 +685,7 @@ if (!isset($_SESSION['loginId'])) {
             }
             // }
         });
-
-
         //   ContextMenu  open when rightclik willbe  untitled list............................................... 
-
         $(document).ready(function () {
             // Right-click event on list item
             $(document).on("contextmenu", ".list-item", function (event) {
@@ -705,9 +724,7 @@ if (!isset($_SESSION['loginId'])) {
             });
 
         });
-
         //untitled list (Context Menu)  delete-ajax........................................
-
         $(document).on("click", ".delete-list", function () {
             let deleteListId = $("#listcontextMenu").attr("data-id");
             // let activeInput = $(".activeInput").data('id');
@@ -780,150 +797,192 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
-
         //defaultList ajax..................................
-        function renderDefaultList() {
+        // function renderDefaultList() {
+        //     $.ajax({
+        //         url: "./congfig/server.php",
+        //         type: "post",
+        //         data: {
+        //             getDefaultList: true
+        //         },
+        //         success: function (response) {
+        //             let array = JSON.parse(response);
+        //             console.log(array)
+        //             if (array.success) {
+
+        //                 let defaultList = array.defaultList;
+        //                 // console.log(defaultList)
+        //                 defaultList.map((ele, index) => {
+        //                     let html = `
+        //                                  <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"data-id="${ele.id}">
+        //                                 <i class="${ele.icon_class} mr-2 "></i> ${ele.list_name}</li>
+        //                              `;
+
+
+        //                     console.log($(".defaultList").append(html))
+        //                 })
+
+
+        //             }
+        //         },
+        //         error: function () {
+        //             alert(" getDefaultList AJAX request failed!");
+        //         }
+        //     });
+        // }
+        $(document).on("click", ".defaultList ", function () {
+            // Pehle sabhi list items se active class hatao
+            $(".defaultList").removeClass("activeList bg-teal-500 text-white font-bold");
+
+            // Ab jispe click kiya hai usko active class add karo
+            $(this).addClass("activeList bg-teal-500 text-white font-bold");
+            let Id = $(this).attr("data-id")
+            getTasks(Id)
+        });
+        $(document).on("click", ".star", function () {
+            let star = $(this)
+
+            let starId = star.attr("data-id")
+            let impValue = star.attr("data-imp")
+
+
+            let newimpValue;
+            if (impValue == 0) {
+                newimpValue = 1;
+            } else {
+                newimpValue = 0;
+            }
             $.ajax({
                 url: "./congfig/server.php",
                 type: "post",
-                data: {
-                    getDefaultList: true
-                },
+                data: { isImportant: true, id: starId, important: newimpValue },
                 success: function (response) {
-                    let array = JSON.parse(response);
-                    console.log(array)
-                    if (array.success) {
+                    let arr = JSON.parse(response);
+                    console.log(arr)
+                    if (arr.success) {
+                        if (impValue == '1') {
+                            $(".isImp" + starId).removeClass("text-yellow-500").addClass("text-gray-400");
+                            $(".isImp" + starId).attr("data-imp", 0)
+                            let implistId = $(".activeList").attr("data-id")
 
-                        let defaultList = array.defaultList;
-                        // console.log(defaultList)
-                        defaultList.map((ele, index) => {
-                            let html = `
-                                         <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"data-id="${ele.id}">
-                                        <i class="${ele.icon_class} mr-2 "></i> ${ele.list_name}</li>
-                                     `;
+                            if (implistId == "important") {
+                                setTimeout(() => {
+                                    $(".removeImp" + starId).remove()
 
+                                }, 500)
+                            }
+                        } else {
+                            $(".isImp" + starId).attr("data-imp", 1)
+                            $(".isImp" + starId).addClass("text-yellow-500").removeClass("text-gray-400");
 
-                            console.log($(".defaultList").append(html))
-                        })
-
-
+                        }
                     }
-                },
-                error: function () {
-                    alert(" getDefaultList AJAX request failed!");
                 }
             });
-        }
-
+        });
         // rename-list jquary with ajax............................................................................
 
         // $(document).on("click", ".rename-list", function () {
-        //     let listId = $("#listcontextMenu").attr("data-id")
-        //     $("#listcontextMenu").fadeOut("fast");
-        //     $(".activeInput").attr("data-id", listId);
-        //     $('.listInput' + listId).removeClass('hidden');
-        //     $('.listSpan' + listId).addClass('hidden');
-        //     $(".listInput" + listId).focus().select();
+        // let listId = $("#listcontextMenu").attr("data-id")
+        // $("#listcontextMenu").fadeOut("fast");
+        // $(".activeInput").attr("data-id", listId);
+        // $('.listInput' + listId).removeClass('hidden');
+        // $('.listSpan' + listId).addClass('hidden');
+        // $(".listInput" + listId).focus().select();
         // });
         // function updateList(listId, listName) {
-        //     $.ajax({
-        //         url: "./congfig/server.php", // Corrected URL
-        //         type: "post",
-        //         data: { renamelist: true, listId: listId, listName: listName },
-        //         success: function (response) {
-        //             console.log("Server Response:", response);
-        //             let res = JSON.parse(response);
-        //             if (res.success) {
-        //                 $(".custom-lists").empty();
-        //                 listDataRender();
+        // $.ajax({
+        // url: "./congfig/server.php", // Corrected URL
+        // type: "post",
+        // data: { renamelist: true, listId: listId, listName: listName },
+        // success: function (response) {
+        // console.log("Server Response:", response);
+        // let res = JSON.parse(response);
+        // if (res.success) {
+        // $(".custom-lists").empty();
+        // listDataRender();
 
-        //                 Swal.fire({
-        //                     icon: "success",
-        //                     title: "Renamed!",
-        //                     text: "List name updated successfully.",
-        //                     timer: 2000,
-        //                     showConfirmButton: false
-        //                 });
-        //             } else {
-        //                 Swal.fire({
-        //                     icon: "error",
-        //                     title: "Error!",
-        //                     text: "Failed to rename the list.",
-        //                 });
-        //             }
-        //         }
-        //     })
+        // Swal.fire({
+        // icon: "success",
+        // title: "Renamed!",
+        // text: "List name updated successfully.",
+        // timer: 2000,
+        // showConfirmButton: false
+        // });
+        // } else {
+        // Swal.fire({
+        // icon: "error",
+        // title: "Error!",
+        // text: "Failed to rename the list.",
+        // });
+        // }
+        // }
+        // })
         // }
 
         // $(document).on("click", ".rename-list1", function () {
-        //     let updatelist;
-        //     let renameListId = $("#listcontextMenu").attr("data-id");
+        // let updatelist;
+        // let renameListId = $("#listcontextMenu").attr("data-id");
 
-        //     if (!renameListId) {
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text: "Error: No rename  List ID found!",
-        //         });
-        //         return;
-        //     }
+        // if (!renameListId) {
+        // Swal.fire({
+        // icon: "error",
+        // title: "Oops...",
+        // text: "Error: No rename List ID found!",
+        // });
+        // return;
+        // }
 
-        //     $("#listcontextMenu").fadeOut("fast");
-        //     $('.listInput' + renameListId).removeClass('hidden');
-        //     $('.listSpan' + renameListId).addClass('hidden');
-        //     $(".listInput" + renameListId).focus().select();
-        //     $(document).on("keypress", ".listInput", function (e) {
-        //         if (e.which === 13) {
-        //             renameListId = $("#listcontextMenu").attr("data-id");
-        //             alert(renameListId)
-        //             updatelist = $(this).val();
-        //             // console.log(updatelist);
-        //             if (updatelist === "") {
-        //                 Swal.fire({
-        //                     icon: "error",
-        //                     title: "Oops...",
-        //                     text: "List name cannot be empty!",
-        //                 });
-        //                 return;
-        //             }
-        //             $.ajax({
-        //                 url: "./congfig/server.php", // Corrected URL
-        //                 type: "post",
-        //                 data: { renamelist: true, id: renameListId, list: updatelist },
-        //                 success: function (response) {
-        //                     console.log("Server Response:", response);
-        //                     let res = JSON.parse(response);
-        //                     if (res.success) {
-        //                         $(".custom-lists").empty();
-        //                         listDataRender();
-        //                         Swal.fire({
-        //                             icon: "success",
-        //                             title: "Renamed!",
-        //                             text: "List name updated successfully.",
-        //                             timer: 2000,
-        //                             showConfirmButton: false
-        //                         });
-        //                     } else {
-        //                         Swal.fire({
-        //                             icon: "error",
-        //                             title: "Error!",
-        //                             text: "Failed to rename the list.",
-        //                         });
-        //                     }
-        //                 }
-        //             })
-        //         }
+        // $("#listcontextMenu").fadeOut("fast");
+        // $('.listInput' + renameListId).removeClass('hidden');
+        // $('.listSpan' + renameListId).addClass('hidden');
+        // $(".listInput" + renameListId).focus().select();
+        // $(document).on("keypress", ".listInput", function (e) {
+        // if (e.which === 13) {
+        // renameListId = $("#listcontextMenu").attr("data-id");
+        // alert(renameListId)
+        // updatelist = $(this).val();
+        // // console.log(updatelist);
+        // if (updatelist === "") {
+        // Swal.fire({
+        // icon: "error",
+        // title: "Oops...",
+        // text: "List name cannot be empty!",
+        // });
+        // return;
+        // }
+        // $.ajax({
+        // url: "./congfig/server.php", // Corrected URL
+        // type: "post",
+        // data: { renamelist: true, id: renameListId, list: updatelist },
+        // success: function (response) {
+        // console.log("Server Response:", response);
+        // let res = JSON.parse(response);
+        // if (res.success) {
+        // $(".custom-lists").empty();
+        // listDataRender();
+        // Swal.fire({
+        // icon: "success",
+        // title: "Renamed!",
+        // text: "List name updated successfully.",
+        // timer: 2000,
+        // showConfirmButton: false
+        // });
+        // } else {
+        // Swal.fire({
+        // icon: "error",
+        // title: "Error!",
+        // text: "Failed to rename the list.",
+        // });
+        // }
+        // }
+        // })
+        // }
 
-
-        //     })
 
         // })
 
-
-
-
-
-
+        // })
     </script>
 
 </body>

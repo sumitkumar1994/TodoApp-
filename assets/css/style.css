@@ -4,46 +4,46 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   width: 100%;
   max-width: 100%;
-}
+} */
 
-.checkbox-container {
+/* .checkbox-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50%; /* Takes up half the height of its parent */
-  margin: 0; /* No margin */
-}
+  height: 50%; 
+  margin: 0; 
+} */
 
 /* Hide the actual checkbox input */
-.checkbox {
+/* .checkbox {
   display: none;
-}
+} */
 
 /* Label for the checkbox, used to style the custom checkbox */
-.checkbox-label {
+/* .checkbox-label {
   position: relative;
   display: inline-flex;
   align-items: center;
-  cursor: pointer; /* Indicates the label is clickable */
-}
+  cursor: pointer; 
+} */
 
 /* Container for the flip animation */
-.checkbox-flip {
+/* .checkbox-flip {
   width: 60px;
   height: 60px;
-  perspective: 1000px; /* Adds 3D perspective for the flip effect */
+  perspective: 1000px; 
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  transition: transform 0.4s ease; /* Smooth transition for scaling */
-}
+  transition: transform 0.4s ease; 
+} */
 
 /* Front and back faces of the flip animation */
-.checkbox-front,
+/* .checkbox-front,
 .checkbox-back {
   width: 50%;
   height: 50%;
@@ -51,20 +51,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 12px; /* Rounded corners */
-  backface-visibility: hidden; /* Hides the back face when flipped */
-  transition: transform 0.3s ease; /* Smooth transition for flipping */
-}
+  border-radius: 12px; 
+  backface-visibility: hidden; 
+  transition: transform 0.3s ease; 
+} */
 
 /* Front face styling */
 .checkbox-front {
-  background: linear-gradient(
-    135deg,
-    #ff6347,
-    #f76c6c
-  ); /* Gradient background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transform: rotateY(0deg); /* Initial rotation */
+  background: linear-gradient(135deg, #ff6347, #f76c6c);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: rotateY(0deg);
 }
 
 /* Back face styling */
