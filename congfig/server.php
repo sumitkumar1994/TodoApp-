@@ -200,6 +200,7 @@ if (isset($_POST["taskBtn"])) {
     $task = $_POST["task"] ?? '';
     $userid = $_POST['userid'] ?? '';
     $activeListId = $_POST["activeListId"] ?? '';
+    $important = $_POST["important"] ?? 0;
     $errorcount = 0;
     // $returndata = [];
     $returndata["success"] = false;
@@ -219,7 +220,7 @@ if (isset($_POST["taskBtn"])) {
 
     }
     if ($errorcount == 0) {
-        $Sql = "INSERT INTO tasks (task_name,list_id,created_by,updated_by)values('$task', '$activeListId','$userid','$userid')";
+        $Sql = "INSERT INTO tasks (task_name,list_id,created_by,updated_by,important)values('$task', '$activeListId','$userid','$userid','$important')";
         $result = mysqli_query($conn, $Sql);
         if ($result) {
             $fetch_sql = "SELECT * FROM tasks where  created_by ='$userid' AND list_id ='$activeListId' ORDER BY id DESC";

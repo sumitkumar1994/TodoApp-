@@ -277,6 +277,7 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on("click", "#taskBtn", function (e) {
             e.preventDefault();
             let task = $('#task').val().trim();
+
             // alert(task);
             // return false;
             let error = 0;
@@ -303,35 +304,41 @@ if (!isset($_SESSION['loginId'])) {
             if (error === 0) {
                 let form = $('#task_form');
                 let url = form.attr('action');
-                let activeListId = $(".activeList").data("id")
+                let activeListId = $(".activeList").attr("data-id")
+                console.log(typeof activeListId);
 
                 let formData = form.serialize();
-                formData += "&activeListId=" + activeListId,
+                formData += "&activeListId=" + activeListId;
 
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: formData,
-                        success: function (response) {
-                            let arr = JSON.parse(response);
-                            console.log(arr);
-                            if (arr.success) {
-                                rander(arr.tasklist);
-                            } else {
-                                alert("tasks not updated");
-                            }
-                            $('#task').val('');
+                if (activeListId === "important") {
+                    formData += "&important=1";
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        let arr = JSON.parse(response);
+                        console.log(arr);
+                        if (arr.success) {
+                            rander(arr.tasklist);
+                        } else {
+                            alert("tasks not updated");
                         }
-                    })
+                        $('#task').val('');
+                    }
+                })
             }
         })
         function getTasks(id = "") {
+
             let request = {
                 getdata: true
             }
             if (id != "") {
                 request.id = id
-                // console.log(request.Id)
+                // alert(request.Id)
             }
 
             $.ajax({
@@ -365,7 +372,7 @@ if (!isset($_SESSION['loginId'])) {
                 <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3  removeImp${element.id}  rightClick"  >
                         <div class="flex items-center space-x-3 max-w-xs"data-id="${element.id}">
                             <input type="checkbox" class="w-4 h-4    ">
-                            <span class="flex-grow text-lg text-gray-900 font-[5px]">${element.task_name}</span>
+                            <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
                         </div>
                             
                         <div class="flex items-center space-x-2">
@@ -620,11 +627,11 @@ if (!isset($_SESSION['loginId'])) {
                     // console.log(typeof array)
                     if (array.success) {
                         // Filter lists where is_default == 0
-                        let filteredList = array.list.filter(item => item.is_default == 0);
+                        // let filteredList = array.list.filter(item => item.is_default == 0);
 
-                        if (filteredList.length > 0) {
-                            renderlist(filteredList);
-                        }
+                        // if (filteredList.length > 0) {
+                        // }
+                        renderlist(array.list);
                     }
                 },
                 error: function () {
