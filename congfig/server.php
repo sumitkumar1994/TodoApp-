@@ -200,7 +200,9 @@ if (isset($_POST["taskBtn"])) {
     $task = $_POST["task"] ?? '';
     $userid = $_POST['userid'] ?? '';
     $activeListId = $_POST["activeListId"] ?? '';
-    $important = $_POST["important"] ?? 0;
+    $important = $_POST["important"] ?? '';
+    $important = $_POST["important"] ?? '';
+    $checked = $_POST["checked"] ?? '';
     $errorcount = 0;
     // $returndata = [];
     $returndata["success"] = false;
@@ -220,7 +222,7 @@ if (isset($_POST["taskBtn"])) {
 
     }
     if ($errorcount == 0) {
-        $Sql = "INSERT INTO tasks (task_name,list_id,created_by,updated_by,important)values('$task', '$activeListId','$userid','$userid','$important')";
+        $Sql = "INSERT INTO tasks (task_name,list_id,created_by,updated_by,important,checked)values('$task', '$activeListId','$userid','$userid','$important','$checked')";
         $result = mysqli_query($conn, $Sql);
         if ($result) {
             $fetch_sql = "SELECT * FROM tasks where  created_by ='$userid' AND list_id ='$activeListId' ORDER BY id DESC";
@@ -249,12 +251,15 @@ if (isset($_POST["getdata"])) {
     $id = $_POST['id'];
     if (isset($_POST['id'])) {
         if ($id == "important") {
-            $where = "and important='1'";
+            $where = "and important='1'and checked= '0'";
+        } elseif ($id == "complete") {
+            $where = "and checked= '1'";
         } else {
+            $where = "and list_id= '$id'and checked= '0'";
 
-            $where = "and list_id= '$id'";
         }
     }
+
     $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]'$where ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
     if ($result) {
@@ -505,6 +510,36 @@ if (isset($_POST['isImportant'])) {
         $returndata["important"] = $important;
     } else {
         $returndata['msg'] = "Task $id has been removed from Important successfully ";
+
+    }
+    echo json_encode($returndata, true);
+}
+
+if (isset($_POST['ischecked'])) {
+    $checkapi = 0;
+    $id = $_POST['id'] ?? '';
+    $checkedTask = $_POST['checkedTask'] ?? '';
+    // print_r($checked);
+
+    $returndata['success'] = false;
+    if ($checkedTask == 1) {
+
+        $query = "UPDATE tasks SET checked = '1' WHERE id = $id";
+    } else {
+        $query = "UPDATE tasks SET checked = '0' WHERE id = $id";
+
+    }
+    $result = mysqli_query($conn, $query);
+    // print_r($result);
+    // die;
+
+    if ($result) {
+
+        $returndata["success"] = true;
+        $returndata['msg'] = "Task $id marked checkedTask successfully.";
+        $returndata["checked"] = $checkedTask;
+    } else {
+        $returndata['msg'] = "Task $id has been removed from $checkedTask successfully ";
 
     }
     echo json_encode($returndata, true);

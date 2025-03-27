@@ -62,15 +62,17 @@ if (!isset($_SESSION['loginId'])) {
             type="text" placeholder="Search">
 
         <ul class="space-y-2 ">
-            <li class="p-2 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
+            <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
                 data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
-            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important"><i
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important"><i
                     class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
-            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="planned"><i
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="planned"><i
                     class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
-            <li class="p-2 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned"><i
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="complete"><i
+                    class="fas fa-check-circle text-red-400 mr-2"></i> Completed</li>
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned"><i
                     class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
-            <li class="p-2 defaultList hover:bg-teal-600  cursor-pointer  flex items-center mr-2" data-id="Tasks">
+            <li class="p-1 defaultList hover:bg-teal-600  cursor-pointer  flex items-center mr-2" data-id="Tasks">
                 <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
             </li>
         </ul>
@@ -313,6 +315,9 @@ if (!isset($_SESSION['loginId'])) {
                 if (activeListId === "important") {
                     formData += "&important=1";
                 }
+                if (activeListId === "checked") {
+                    formData += "&checked=1";
+                }
 
                 $.ajax({
                     url: url,
@@ -367,11 +372,17 @@ if (!isset($_SESSION['loginId'])) {
                 if (element.important == "1") {
                     isimp = "text-yellow-500"
                 }
+                let ischeck;
+                if (element.checked == 1) {
+                    ischeck = "checked"
+                } else {
+                    ischeck = ""
+                }
                 html += `
                         
-                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3  removeImp${element.id}  rightClick"  >
-                        <div class="flex items-center space-x-3 max-w-xs"data-id="${element.id}">
-                            <input type="checkbox" class="w-4 h-4    ">
+                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3  removeImp${element.id} removeCheck${element.id} rightClick"  >
+                        <div class="flex items-center space-x-3 max-w-xs" >
+                            <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
                             <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
                         </div>
                             
@@ -528,7 +539,7 @@ if (!isset($_SESSION['loginId'])) {
         });
 
         // **Checkbox aur delete button click pe sidebar event na ho**
-        $(document).on('click', 'input[type="checkbox"], .star', function (e) {
+        $(document).on('click', 'input[type="checkbox"], .star,.defaultList', function (e) {
             e.stopPropagation();
         });
 
@@ -654,7 +665,7 @@ if (!isset($_SESSION['loginId'])) {
                 let html = `
                                 <li class="p-1 mr-2     cursor-pointer flex items-center list-item hover:bg-teal-500" data-id="${element.id} ">
                                     <i class="fa-solid fa-bars  text-blue-300 mr-2"></i>
-                                    <span class=" list-text ${span} px-1  py-1 listSpan listSpan${element.id}">
+                                    <span class=" list-text ${span} px-1  py-1 listSpan listSpan${element.id} ">
                                         ${element.list_name} 
                                     </span>
                                     <input type="text" 
@@ -887,6 +898,35 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
+        $(document).on("click", ".checkbox", function () {
+            let check = $(this);
+            let checkboxId = check.attr("data-id");
+            let checkValue = check.attr("data-check");
+            // console.log(checkValue)
+            let newcheckValue;
+            if (checkValue == 0) {
+                newcheckValue = 1;
+            } else {
+                newcheckValue = 0;
+            }
+            $.ajax({
+                url: "./congfig/server.php",
+                type: "post",
+                data: { ischecked: true, id: checkboxId, checkedTask: newcheckValue },
+                success: function (response) {
+                    let arr = JSON.parse(response);
+                    console.log(arr)
+
+                    if (arr.success) {
+                        $(".removeCheck" + checkboxId).remove();
+                    }
+
+
+
+                }
+            });
+        })
+
         // rename-list jquary with ajax............................................................................
 
         // $(document).on("click", ".rename-list", function () {
