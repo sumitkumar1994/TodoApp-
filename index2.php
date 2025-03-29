@@ -28,16 +28,11 @@ if (!isset($_SESSION['loginId'])) {
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
-<!-- <style>
-    .activeList {
-        background-color: lightgrey;
-        color: white;
-        font-weight: bold;
-    }
-</style> -->
+
 
 <body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border">
 
+    <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav
         class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
@@ -171,6 +166,7 @@ if (!isset($_SESSION['loginId'])) {
 
         </div>
         <!-- task container -->
+
         <div class="mt-1 h-screen overflow-y space-y-1 p-2" id="taskListContainer">
             <!-- <div class="flex justify-between bg-white text-black p-3 rounded shadow items-center">
                 <input type="checkbox" class="w-5 h-5">
@@ -187,6 +183,7 @@ if (!isset($_SESSION['loginId'])) {
             <form class="flex space-x-2" action="./congfig/server.php" method="POST" id="task_form">
                 <input type='hidden' name="taskBtn" value="1">
                 <input type='hidden' name="userid" value="<?php echo $_SESSION['loginId'] ?>">
+
                 <input type="text" class="flex-1 p-2 rounded-sm bg-white text-black focus:ring " placeholder="Add task"
                     name="task" id="task">
                 <button type="submit" id="taskBtn"
@@ -369,19 +366,30 @@ if (!isset($_SESSION['loginId'])) {
 
             getTaskList.forEach(element => {
                 let isimp = "text-gray-400"
+                let completeid = $(".checkbox").attr("data-id")
                 if (element.important == "1") {
                     isimp = "text-yellow-500"
                 }
                 let ischeck;
                 if (element.checked == 1) {
                     ischeck = "checked"
+
                 } else {
                     ischeck = ""
                 }
+                let iscomplete;
+                if (element.completetask !== "1") {
+                    iscomplete = "complete"
+                }
+
                 html += `
+               <span class="w-40 text-center px-3 py-1  mt-4  text-black bg-slate-300 hover:bg-white rounded-md    cursor-pointer hidden complete complete${element.id}" data-id="${element.id}" >
+                 ${iscomplete}
+                </span>
                         
-                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-3  removeImp${element.id} removeCheck${element.id} rightClick"  >
-                        <div class="flex items-center space-x-3 max-w-xs" >
+                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2  removeCheck${element.id} rightClick"  >
+                
+                      <div class="flex items-center space-x-3 max-w-xs" >
                             <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
                             <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
                         </div>
@@ -856,6 +864,12 @@ if (!isset($_SESSION['loginId'])) {
             $(this).addClass("activeList bg-teal-500 text-white font-bold");
             let Id = $(this).attr("data-id")
             getTasks(Id)
+            let listid = $(this).attr("data-id")
+            if (listid == "complete" || listid == "Assigned") {
+                $("#task_form").hide()
+            } else {
+                $("#task_form").show()
+            }
         });
         $(document).on("click", ".star", function () {
             let star = $(this)
@@ -901,6 +915,7 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on("click", ".checkbox", function () {
             let check = $(this);
             let checkboxId = check.attr("data-id");
+            let iscomplete = check.prop("checked") ? 1 : 0;
             let checkValue = check.attr("data-check");
             // console.log(checkValue)
             let newcheckValue;
@@ -909,23 +924,41 @@ if (!isset($_SESSION['loginId'])) {
             } else {
                 newcheckValue = 0;
             }
+
             $.ajax({
                 url: "./congfig/server.php",
                 type: "post",
-                data: { ischecked: true, id: checkboxId, checkedTask: newcheckValue },
+                data: { ischecked: true, id: checkboxId, checkedTask: newcheckValue, iscomplete: iscomplete },
                 success: function (response) {
                     let arr = JSON.parse(response);
                     console.log(arr)
 
                     if (arr.success) {
-                        $(".removeCheck" + checkboxId).remove();
+                        let completed = $(".activeList").attr("data-id")
+                        if (completed == "complete") {
+                            $(".removeCheck" + checkboxId).remove();
+                        }
                     }
-
-
-
                 }
-            });
+
+            })
         })
+
+        $(document).on("change", ".checkbox", function () {
+            let taskText = $(this).next("span");
+            let taskId = $(".complete").attr("data-id");
+            // alert(taskId)
+            if ($(this).prop("checked")) {
+                taskText.css("text-decoration", "line-through");
+                $(".complete" + taskId).removeClass("hidden");
+            } else {
+                $(".complete" + taskId).addClass("hidden");
+                taskText.css("text-decoration", "none");
+            }
+
+        });
+
+
 
         // rename-list jquary with ajax............................................................................
 

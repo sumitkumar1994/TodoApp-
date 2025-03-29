@@ -57,22 +57,22 @@
 } */
 
 /* Front face styling */
-.checkbox-front {
+/* .checkbox-front {
   background: linear-gradient(135deg, #ff6347, #f76c6c);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: rotateY(0deg);
-}
+} */
 
 /* Back face styling */
-.checkbox-back {
+/* .checkbox-back {
   background: linear-gradient(
     135deg,
     #36b54a,
     #00c1d4
-  ); /* Gradient background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transform: rotateY(180deg); /* Initial rotation (hidden) */
-}
+  ); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transform: rotateY(180deg); 
+} */
 
 /* Scale up the flip container on hover */
 .checkbox-wrapper:hover .checkbox-flip {
@@ -97,9 +97,9 @@
 
 /* Styling for icons inside the checkbox */
 .icon-path {
-  stroke: white; /* White stroke for icons */
-  stroke-width: 2; /* Stroke thickness */
-  fill: transparent; /* No fill */
+  stroke: white;
+  stroke-width: 2;
+  fill: transparent;
 }
 
 /* Scrollbar styling for the task list container */
