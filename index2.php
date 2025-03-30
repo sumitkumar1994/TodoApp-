@@ -20,12 +20,11 @@ if (!isset($_SESSION['loginId'])) {
     <link href="./assets/css/swap.css" rel="stylesheet">
     <!--`` Font Awesome -->
     <link href="./assets/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
@@ -36,7 +35,7 @@ if (!isset($_SESSION['loginId'])) {
     <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav
         class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-3  loginUser  ">
             <div
                 class=" border-b-amber-800 border h-10 w-10 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
                 <?php echo ($_SESSION['loginuserData']['name'][0]);
@@ -51,6 +50,30 @@ if (!isset($_SESSION['loginId'])) {
                 </p>
             </div>
         </div>
+        <div
+            class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[50px] left-[10px]   managesection  border border-gray-300 ">
+
+            <ul class="text-gray-800 font-medium ">
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
+                    cursor-pointer rounded-lg " data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                    <i class="fa-solid  fa-user-gear  fa-flip mr-3 text-yellow-500"></i>ManageAcounts
+                </li>
+                <hr>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
+                    cursor-pointer rounded-lg  ">
+                    <i class="fa-solid fa-cog fa-spin mr-3 text-yellow-700"></i> Satting
+                </li>
+                <hr>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
+                    cursor-pointer rounded-lg  ">
+                    <i class="fa-solid fa-sync fa-spin mr-3 text-green-600"></i> Sync
+                </li>
+            </ul>
+
+        </div>
+
 
         <input
             class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
@@ -59,14 +82,17 @@ if (!isset($_SESSION['loginId'])) {
         <ul class="space-y-2 ">
             <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
                 data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important"><i
-                    class="fas fa-star text-yellow-400 mr-2"></i> Important</li>
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> Important
+            </li>
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="planned"><i
                     class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="complete"><i
-                    class="fas fa-check-circle text-red-400 mr-2"></i> Completed</li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned"><i
-                    class="fas fa-user text-green-400 mr-2"></i> Assigned to me</li>
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="complete">
+                <i class="fas fa-check-circle text-red-400 mr-2"></i> Completed
+            </li>
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned">
+                <i class="fas fa-user text-green-400 mr-2"></i> Assigned to me
+            </li>
             <li class="p-1 defaultList hover:bg-teal-600  cursor-pointer  flex items-center mr-2" data-id="Tasks">
                 <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
             </li>
@@ -75,8 +101,7 @@ if (!isset($_SESSION['loginId'])) {
         <!-- Scrollable List -->
         <input type="hidden" class="activeInput">
         <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
-        scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-transparent 
-        hover:scrollbar-thumb-teal-500">
+        ">
         </ul>
         <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
             <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
@@ -550,6 +575,11 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on('click', 'input[type="checkbox"], .star,.defaultList', function (e) {
             e.stopPropagation();
         });
+
+        $(document).on('click', '.loginUser', function () {
+            $('.managesection ').toggle('hidden')
+        });
+
 
         // **Context menu open logic**..........................................................
         $(document).on('contextmenu', '.rightClick', function (e) {
