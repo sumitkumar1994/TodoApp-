@@ -20,7 +20,7 @@ if (!isset($_SESSION['loginId'])) {
     <link href="./assets/css/swap.css" rel="stylesheet">
     <!--`` Font Awesome -->
     <link href="./assets/css/all.min.css" rel="stylesheet">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -29,7 +29,7 @@ if (!isset($_SESSION['loginId'])) {
 </head>
 
 
-<body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border">
+<body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border  ">
 
     <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
@@ -55,8 +55,8 @@ if (!isset($_SESSION['loginId'])) {
 
             <ul class="text-gray-800 font-medium ">
                 <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                    cursor-pointer rounded-lg " data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                    <i class="fa-solid  fa-user-gear  fa-flip mr-3 text-yellow-500"></i>ManageAcounts
+                    cursor-pointer rounded-lg " id="openModal" type="button"><i
+                        class="fa-solid  fa-users fa-flip mr-3 text-yellow-500"></i>ManageAccounts
                 </li>
                 <hr>
 
@@ -159,11 +159,58 @@ if (!isset($_SESSION['loginId'])) {
                 <span>New List</span>
             </span>
         </button>
-
-
-
-
     </nav>
+    <!-- Modal Background (Hidden by default) -->
+    <div id="modalBg" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center">
+
+        <!-- Modal Box -->
+        <div id="modalBox"
+            class=" bg-white/70 backdrop-blur-lg p-1 rounded-lg shadow-xl w-96 opacity-0 scale-95 transition-all duration-300">
+
+            <h2 class="text-xl text-black text-center font-bold mb-4">Manage Accounts</h2>
+            <!-- <p class="text-gray-700 mb-4">This is a simple popup modal using Tailwind CSS and jQuery.</p> -->
+            <div class="flex items-center justify-between   space-x-6 p-2  hover:bg-gray-300 ">
+                <div
+                    class=" border-b-amber-800 border h-10 w-16 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
+                    <?php echo ($_SESSION['loginuserData']['name'][0]);
+                    ?>
+                </div>
+                <div>
+                    <p class=" text-black">
+                        <?php echo ($_SESSION['loginuserData']['name']) ?>
+                        <span class=" text-gray-600">
+                            <?php echo ($_SESSION['loginuserData']['email']) ?>
+                        </span>
+                    </p>
+
+                </div>
+                <div>
+                    <p> <?php if (isset($_SESSION['loginId']) && $_SESSION['loginId'] !== '') { ?>
+                        <form action="./congfig/server.php" method="post">
+                            <button class="bg-red-500 text-white  px-3 py-1 rounded-md hover:bg-red-600"
+                                name="logout">LogOut</button>
+                        </form>
+                    <?php } else { ?>
+
+                        <button class="bg-blue-500 text-black px-4 py-2 rounded-sm hover:bg-blue-600">login</button>
+
+                        <button class="bg-blue-500 text-black px-4 py-2 rounded-sm hover:bg-blue-600">signUP</button>
+
+                    <?php } ?></p>
+                </div>
+            </div>
+
+            <!-- Close Button -->
+            <div class="flex justify-end mt-4  ">
+                <button id="closeModal" class="px-3 py-2 bg-gray-200 text-black rounded-md hover:bg-red-600">
+                    Close
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
 
     <!-- Main Content -->
     <main class="p-3 flex flex-col w-4/5 manageSection " is_open="0">
@@ -178,8 +225,8 @@ if (!isset($_SESSION['loginId'])) {
             </div>
             <?php if (isset($_SESSION['loginId']) && $_SESSION['loginId'] !== '') { ?>
                 <form action="./congfig/server.php" method="post">
-                    <button class="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600"
-                        name="logout">Logout</button>
+                    <!-- <button class="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600"
+                        name="logout">Logout</button> -->
                 </form>
             <?php } else { ?>
 
@@ -604,8 +651,8 @@ if (!isset($_SESSION['loginId'])) {
                 top: topPosition + "px",
                 left: e.pageX + "px"
             });
-
             e.stopPropagation(); // Context menu ka propagation roko
+
         });
 
         // **Jab kahi aur click ho, tab context menu band ho jaye**
@@ -986,6 +1033,21 @@ if (!isset($_SESSION['loginId'])) {
                 taskText.css("text-decoration", "none");
             }
 
+        });
+        $(document).ready(function () {
+            // Open Modal
+            $("#openModal").click(function () {
+                $(".managesection").css('display', 'none')
+                $("#modalBg").removeClass("hidden"); // Show background
+                $("#modalBox").removeClass("opacity-0 scale-95").addClass("opacity-100 scale-100"); // Animate modal
+            });
+
+            // Close Modal
+            $("#closeModal").click(function (e) {
+                if (e.target !== this) return; // Prevent closing when clicking inside modal
+                $("#modalBox").removeClass("opacity-100 scale-100").addClass("opacity-0 scale-95"); // Animate close
+                setTimeout(() => $("#modalBg").addClass("hidden"), 300); // Hide background after animation
+            });
         });
 
 

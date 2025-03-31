@@ -201,7 +201,7 @@ if (isset($_POST["taskBtn"])) {
     $userid = $_POST['userid'] ?? '';
     $activeListId = $_POST["activeListId"] ?? '';
     $important = $_POST["important"] ?? '';
-    $important = $_POST["important"] ?? '';
+    // $important = $_POST["important"] ?? '';
     $checked = $_POST["checked"] ?? '';
     $errorcount = 0;
     // $returndata = [];
@@ -255,7 +255,7 @@ if (isset($_POST["getdata"])) {
         } elseif ($id == "complete") {
             $where = "and checked= '1'";
         } else {
-            $where = "and list_id= '$id'and checked= '0'||checked= '1'";
+            $where = "and list_id= '$id'and checked= '0'|| checked= '1'";
 
         }
     }
@@ -527,9 +527,10 @@ if (isset($_POST['isImportant'])) {
 if (isset($_POST['ischecked'])) {
     $checkapi = 0;
     $id = $_POST['id'] ?? '';
+    // print_r($id);
     $checkedTask = $_POST['checkedTask'] ?? '';
     $completetask = $_POST['iscomplete'] ?? '';
-    $returndata['success'] = false;
+
     if ($checkedTask == 1 && $completetask == 1) {
 
         $query = "UPDATE tasks SET checked = ' 1',complete_task='1' WHERE id = $id";
