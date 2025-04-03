@@ -100,8 +100,7 @@ if (!isset($_SESSION['loginId'])) {
         <hr>
         <!-- Scrollable List -->
         <input type="hidden" class="activeInput">
-        <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  
-        ">
+        <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  ">
         </ul>
         <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
             <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
@@ -240,6 +239,7 @@ if (!isset($_SESSION['loginId'])) {
         <!-- task container -->
 
         <div class="mt-1 h-screen overflow-y space-y-1 p-2" id="taskListContainer">
+
             <!-- <div class="flex justify-between bg-white text-black p-3 rounded shadow items-center">
                 <input type="checkbox" class="w-5 h-5">
                 <div class="flex items-center space-x-3">
@@ -249,6 +249,56 @@ if (!isset($_SESSION['loginId'])) {
                     </button>
                 </div>
             </div> -->
+
+        </div>
+        <!--  right click task container contextmenu list-->
+        <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
+                                    border border-gray-300 transition-all duration-200 ease-in-out">
+
+            <ul class="text-gray-800 font-medium">
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
+                </li>
+
+                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
+                </li>
+            </ul>
+
+            <div class="border-t border-gray-400 mt-1 pt-1">
+                <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
+                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300"
+                    id="delete-btn" data-id="${element.id}">
+                    <i class="fa-solid fa-trash mr-3"></i> Delete Task
+                </li>
+            </div>
         </div>
         <!-- add task input -->
         <div class="mt-auto">
@@ -459,7 +509,7 @@ if (!isset($_SESSION['loginId'])) {
                  ${iscomplete}
                 </span>
                         
-                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2  removeCheck${element.id} rightClick"  >
+                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2  removeCheck${element.id} rightClick"  data-id="${element.id}"  >
                 
                       <div class="flex items-center space-x-3 max-w-xs" >
                             <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
@@ -469,66 +519,16 @@ if (!isset($_SESSION['loginId'])) {
                         <div class="flex items-center space-x-2">
                                 <span class="${isimp} text-lg star isImp${element.id}  "data-id="${element.id}" data-imp="${element.important}"><i class="fas fa-star"></i></span>
                         </div>
-                                
-                        <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
-                                    border border-gray-300 transition-all duration-200 ease-in-out">
-                            
-                            <ul class="text-gray-800 font-medium">
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
-                                </li>
-                                
-                                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                                    <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
-                                </li>
-                            </ul>
-                            
-                            <div class="border-t border-gray-400 mt-1 pt-1">
-                                <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
-                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300" 
-                                    id="delete-btn" data-id="${element.id}">
-                                    <i class="fa-solid fa-trash mr-3"></i> Delete Task
-                                </li>
-                            </div>
-                        </div>
-                        
                 </div>  `;
             });
 
             $('#taskListContainer').append(html);
             // scrollToTop();
         }
-        function scrollToTop() {
-            let container = $('#taskListContainer');
-            container.scrollTop(0);
-        }
+        // function scrollToTop() {
+        //     let container = $('#taskListContainer');
+        //     container.scrollTop(0);
+        // }
         // deletetask function with ajax................................
         // $(document).on("click", "#delete-btn", function () {
         //     let taskid = $(this).data("id");
@@ -555,7 +555,7 @@ if (!isset($_SESSION['loginId'])) {
         //     }
         // });
         $(document).on("click", "#delete-btn", function () {
-            let taskid = $(this).data("id");
+            let taskid = $(".contextMenu").data("id");
             $(".contextMenu").fadeOut("fast");
             Swal.fire({
                 title: "Are you sure?",
@@ -634,9 +634,10 @@ if (!isset($_SESSION['loginId'])) {
 
             // Pehle sabhi context menus ko hide karo
             $(".contextMenu").removeClass("active").addClass("hidden");
+            let itemId = $(this).data("id");
 
             // Current element ka context menu
-            let menu = $(this).find('.contextMenu');
+            let menu = $('.contextMenu');
 
             // Window aur mouse position fetch karo
             let windowHeight = $(window).height(); // Window ki height
@@ -650,7 +651,7 @@ if (!isset($_SESSION['loginId'])) {
             menu.addClass('active').removeClass('hidden').css({
                 top: topPosition + "px",
                 left: e.pageX + "px"
-            });
+            }).attr("data-id", itemId);;
             e.stopPropagation(); // Context menu ka propagation roko
 
         });
@@ -830,6 +831,7 @@ if (!isset($_SESSION['loginId'])) {
         //untitled list (Context Menu)  delete-ajax........................................
         $(document).on("click", ".delete-list", function () {
             let deleteListId = $("#listcontextMenu").attr("data-id");
+            // alert(deleteListId)
             // let activeInput = $(".activeInput").data('id');
 
             if (!deleteListId) {

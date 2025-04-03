@@ -248,8 +248,9 @@ if (isset($_POST["getdata"])) {
     $returndata['success'] = false;
     // $where = " AND (list_id = 'MyDAY' OR important = 1)";   
     $where = '';
-    $id = $_POST['id'];
+
     if (isset($_POST['id'])) {
+        $id = $_POST['id'];
         if ($id == "important") {
             $where = "and important='1'and checked= '0'";
         } elseif ($id == "complete") {
