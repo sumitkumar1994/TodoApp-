@@ -528,13 +528,12 @@ if (isset($_POST['isImportant'])) {
 if (isset($_POST['ischecked'])) {
     $checkapi = 0;
     $id = $_POST['id'] ?? '';
-    // print_r($id);
     $checkedTask = $_POST['checkedTask'] ?? '';
-    // $completetask = $_POST['iscomplete'] ?? '';
 
     $query = "UPDATE tasks SET checked = '$checkedTask' WHERE id = $id";
     $result = mysqli_query($conn, $query);
     if ($result) {
+
         $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if ($result) {
@@ -547,6 +546,7 @@ if (isset($_POST['ischecked'])) {
 
         $returndata["success"] = true;
         $returndata['msg'] = "Task $id marked checkedTask successfully.";
+        // $returndata["completetask"] = $completetask;
     } else {
         $returndata['msg'] = "Task $id has been removed from $checkedTask successfully ";
 

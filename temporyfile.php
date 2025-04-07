@@ -312,7 +312,7 @@ if (!isset($_SESSION['loginId'])) {
             </div>
         </div>
         <!-- add task input -->
-        <div class="mt-auto  ">
+        <div class="mt-auto">
             <form class="flex space-x-2" action="./congfig/server.php" method="POST" id="task_form">
                 <input type='hidden' name="taskBtn" value="1">
                 <input type='hidden' name="userid" value="<?php echo $_SESSION['loginId'] ?>">
@@ -498,8 +498,8 @@ if (!isset($_SESSION['loginId'])) {
             $('#completeTask').empty();
 
 
-            let html = "";
-            let iscompleteTask = ""
+            let taskHtml = "";
+            let doneTaskHtml = ""
 
             getTaskList.forEach(element => {
                 let isimp = "text-gray-400"
@@ -509,56 +509,39 @@ if (!isset($_SESSION['loginId'])) {
                 }
                 let ischeck;
                 if (element.checked == 1) {
-                    ischeck = "checked"
-
+                    ischeck = "checked";
+                    doneTaskHtml += makeTaskHtml(element, ischeck, isimp);
                 } else {
-                    ischeck = ""
-                }
-
-
-                // // Task name styling based on checked status
-                // let taskNameSpan = "";
-                // if (ischeck === "checked") {
-                //     taskNameSpan = `<span class="flex-grow text-lg text-gray-500 line-through" data-id="${element.list_id}">complete</span>`;
-                // } else {
-                //     taskNameSpan = `<span class="flex-grow text-lg text-gray-900" data-id="${element.list_id}">complele</span>`;
-                // }
-
-
-                let taskTemplate = `
-                
-                                     <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2      removeCheck${element.id} rightClick"  data-id="${element.id}"  >
-                                        
-                                        <div class="flex items-center space-x-3 max-w-xs" >
-                                            
-                                                <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
-                                                <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
-                                            </div>
-                                                
-                                            <div class="flex items-center space-x-2">
-                                                    <span class="${isimp} text-lg star isImp${element.id}  "data-id="${element.id}" data-imp="${element.important}"><i class="fas fa-star"></i></span>
-                                            </div>
-                                </div> 
-                `;
-                if (element.checked == 1) {
-                    iscompleteTask += taskTemplate;
-
-                } else {
-                    html += taskTemplate;
+                    ischeck = "";
+                    taskHtml += makeTaskHtml(element, ischeck, isimp);
                 }
             });
-
-            if (iscompleteTask === "") {
+            if (doneTaskHtml == '') {
                 $('#completeHeader').addClass('hidden');
-
             } else {
                 $('#completeHeader').removeClass('hidden');
             }
-            $('#taskListContainer').append(html);
-            $('#completeTask').append(iscompleteTask);
-
-
+            $('#taskListContainer').append(taskHtml);
+            $('#completeTask').append(doneTaskHtml);
         }
+
+
+        function makeTaskHtml(element, isCheck, isImp) {
+            return `
+                <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2      removeCheck${element.id} rightClick"  data-id="${element.id}"  >
+                   
+                        <div class="flex items-center space-x-3 max-w-xs" >
+                           <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${isCheck} data-id="${element.id}"data-check="${element.checked}">
+                           <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
+                       </div>
+                       <div class="flex items-center space-x-2">
+                               <span class="${isImp} text-lg star isImp${element.id}  "data-id="${element.id}" data-imp="${element.important}"><i class="fas fa-star"></i></span>
+                       </div>
+                </div> 
+            `;
+        }
+
+
         // function scrollToTop() {
         //     let container = $('#taskListContainer');
         //     container.scrollTop(0);
@@ -984,7 +967,6 @@ if (!isset($_SESSION['loginId'])) {
             } else {
                 $("#task_form").show()
             }
-
         });
         $(document).on("click", ".star", function () {
             let star = $(this)
@@ -1084,114 +1066,3 @@ if (!isset($_SESSION['loginId'])) {
                 setTimeout(() => $("#modalBg").addClass("hidden"), 300); // Hide background after animation
             });
         });
-
-
-
-        // rename-list jquary with ajax............................................................................
-
-        // $(document).on("click", ".rename-list", function () {
-        // let listId = $("#listcontextMenu").attr("data-id")
-        // $("#listcontextMenu").fadeOut("fast");
-        // $(".activeInput").attr("data-id", listId);
-        // $('.listInput' + listId).removeClass('hidden');
-        // $('.listSpan' + listId).addClass('hidden');
-        // $(".listInput" + listId).focus().select();
-        // });
-        // function updateList(listId, listName) {
-        // $.ajax({
-        // url: "./congfig/server.php", // Corrected URL
-        // type: "post",
-        // data: { renamelist: true, listId: listId, listName: listName },
-        // success: function (response) {
-        // console.log("Server Response:", response);
-        // let res = JSON.parse(response);
-        // if (res.success) {
-        // $(".custom-lists").empty();
-        // listDataRender();
-
-        // Swal.fire({
-        // icon: "success",
-        // title: "Renamed!",
-        // text: "List name updated successfully.",
-        // timer: 2000,
-        // showConfirmButton: false
-        // });
-        // } else {
-        // Swal.fire({
-        // icon: "error",
-        // title: "Error!",
-        // text: "Failed to rename the list.",
-        // });
-        // }
-        // }
-        // })
-        // }
-
-        // $(document).on("click", ".rename-list1", function () {
-        // let updatelist;
-        // let renameListId = $("#listcontextMenu").attr("data-id");
-
-        // if (!renameListId) {
-        // Swal.fire({
-        // icon: "error",
-        // title: "Oops...",
-        // text: "Error: No rename List ID found!",
-        // });
-        // return;
-        // }
-
-        // $("#listcontextMenu").fadeOut("fast");
-        // $('.listInput' + renameListId).removeClass('hidden');
-        // $('.listSpan' + renameListId).addClass('hidden');
-        // $(".listInput" + renameListId).focus().select();
-        // $(document).on("keypress", ".listInput", function (e) {
-        // if (e.which === 13) {
-        // renameListId = $("#listcontextMenu").attr("data-id");
-        // alert(renameListId)
-        // updatelist = $(this).val();
-        // // console.log(updatelist);
-        // if (updatelist === "") {
-        // Swal.fire({
-        // icon: "error",
-        // title: "Oops...",
-        // text: "List name cannot be empty!",
-        // });
-        // return;
-        // }
-        // $.ajax({
-        // url: "./congfig/server.php", // Corrected URL
-        // type: "post",
-        // data: { renamelist: true, id: renameListId, list: updatelist },
-        // success: function (response) {
-        // console.log("Server Response:", response);
-        // let res = JSON.parse(response);
-        // if (res.success) {
-        // $(".custom-lists").empty();
-        // listDataRender();
-        // Swal.fire({
-        // icon: "success",
-        // title: "Renamed!",
-        // text: "List name updated successfully.",
-        // timer: 2000,
-        // showConfirmButton: false
-        // });
-        // } else {
-        // Swal.fire({
-        // icon: "error",
-        // title: "Error!",
-        // text: "Failed to rename the list.",
-        // });
-        // }
-        // }
-        // })
-        // }
-
-
-        // })
-
-        // })
-    </script>
-
-</body>
-
-</html>

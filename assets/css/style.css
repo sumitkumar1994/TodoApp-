@@ -103,40 +103,7 @@
 }
 
 /* Scrollbar styling for the task list container */
-#taskListContainer {
-  height: 80vh !important; /*Maximum height before scrolling*/
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding: 1px; /* Small padding */
-  border-radius: 5px; /* Rounded corners */
-}
-
-/* Custom scrollbar width and track */
-#taskListContainer::-webkit-scrollbar {
-  width: 8px; /* Scrollbar width */
-}
-
-#taskListContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Light gray track */
-  border-radius: 10px; /* Rounded track */
-}
-
-/* Custom scrollbar thumb */
-#taskListContainer::-webkit-scrollbar-thumb {
-  background: #52a6ac; /* Default thumb color */
-  border-radius: 10px; /* Rounded thumb */
-}
-
-/* Hover effect for the scrollbar thumb */
-#taskListContainer::-webkit-scrollbar-thumb:hover {
-  background: #0056b3; /* Blue color on hover */
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  ); /* Gradient on hover */
-}
+/*  */
 
 /* Task item styling */
 .task-item {
