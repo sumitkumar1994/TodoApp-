@@ -253,7 +253,8 @@ if (!isset($_SESSION['loginId'])) {
             </div>
             <div class="w-36  bg-gray-200 p-1 rounded " id="completeHeader">
 
-                <i class="fas fa-chevron-down text-gray-500 ml-2"></i>
+                <i id="downIcon" class="fas fa-chevron-down text-gray-500 ml-2"></i>
+                <i id="rightIcon" class="fas fa-angle-right text-gray-500 ml-2 hidden"></i>
                 <span class="text-green-700 font-semibold pl-2">Complete</span>
 
             </div>

@@ -534,6 +534,8 @@ if (isset($_POST['ischecked'])) {
 
     $query = "UPDATE tasks SET checked = '$checkedTask' WHERE id = $id";
     $result = mysqli_query($conn, $query);
+
+
     if ($result) {
         $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
@@ -542,9 +544,16 @@ if (isset($_POST['ischecked'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
             }
-            $returndata['tasklist'] = $data;
         }
-
+        // $countQuery = "SELECT COUNT(checked) AS completedCount FROM tasks WHERE created_by = '{$_SESSION['loginId']}' AND checked = '1'";
+        // $countResult = mysqli_query($conn, $countQuery);
+        // $completedCount = 0;
+        // if ($countResult) {
+        //     $countRow = mysqli_fetch_assoc($countResult);
+        //     $completedCount = $countRow['completedCount'];
+        // }
+        $returndata['tasklist'] = $data;
+        // $returndata['completedCount'] = $completedCount;
         $returndata["success"] = true;
         $returndata['msg'] = "Task $id marked checkedTask successfully.";
     } else {

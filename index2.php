@@ -251,10 +251,12 @@ if (!isset($_SESSION['loginId'])) {
                 </div> -->
 
             </div>
-            <div class="w-36  bg-gray-200 p-1 rounded " id="completeHeader">
+            <div class="w-36  bg-gray-200 p-1 rounded hover:bg-white" id="completeHeader">
 
-                <i class="fas fa-chevron-down text-gray-500 ml-2"></i>
+                <i id="downIcon" class="fas fa-chevron-down text-gray-500 ml-2"></i>
+                <i id="rightIcon" class="fas fa-angle-right text-gray-500 ml-2 hidden"></i>
                 <span class="text-green-700 font-semibold pl-2">Complete</span>
+                <span id="checkedCount" class="text-gray-500  font-semibold"></span>
 
             </div>
             <!-- completetask append this container -->
@@ -500,6 +502,7 @@ if (!isset($_SESSION['loginId'])) {
 
             let html = "";
             let iscompleteTask = ""
+            let completedCount = ""
 
             getTaskList.forEach(element => {
                 let isimp = "text-gray-400"
@@ -513,6 +516,12 @@ if (!isset($_SESSION['loginId'])) {
 
                 } else {
                     ischeck = ""
+                }
+                let taskNameSpan;
+                if (ischeck === "checked") {
+                    taskNameSpan = "line-through"
+                } else {
+                    taskNameSpan = ""
                 }
 
 
@@ -532,7 +541,7 @@ if (!isset($_SESSION['loginId'])) {
                                         <div class="flex items-center space-x-3 max-w-xs" >
                                             
                                                 <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
-                                                <span class="flex-grow text-lg text-gray-900 font-[5px]"data-id="${element.list_id}">${element.task_name}</span>
+                                                <span class="flex-grow text-lg text-gray-900   font-[5px] ${taskNameSpan} "data-id="${element.list_id}">${element.task_name}</span>
                                             </div>
                                                 
                                             <div class="flex items-center space-x-2">
@@ -542,6 +551,7 @@ if (!isset($_SESSION['loginId'])) {
                 `;
                 if (element.checked == 1) {
                     iscompleteTask += taskTemplate;
+                    completedCount++
 
                 } else {
                     html += taskTemplate;
@@ -556,13 +566,25 @@ if (!isset($_SESSION['loginId'])) {
             }
             $('#taskListContainer').append(html);
             $('#completeTask').append(iscompleteTask);
+            $('#checkedCount').text(completedCount);
+
 
 
         }
-        // function scrollToTop() {
-        //     let container = $('#taskListContainer');
-        //     container.scrollTop(0);
-        // }
+
+        $(document).on('click', '#completeHeader', function () {
+
+            if ($('#completeTask').hasClass('hidden')) {
+                $('#completeTask').removeClass('hidden');
+                $('#downIcon').removeClass('hidden');
+                $('#rightIcon').addClass('hidden');
+            } else {
+                $('#completeTask').addClass('hidden');
+                $('#downIcon').addClass('hidden');
+                $('#rightIcon').removeClass('hidden');
+            }
+        })
+
         // deletetask function with ajax................................
         // $(document).on("click", "#delete-btn", function () {
         //     let taskid = $(this).data("id");
@@ -618,7 +640,7 @@ if (!isset($_SESSION['loginId'])) {
                                     timer: 2000, // Auto-close after 2 seconds
                                     showConfirmButton: false
                                 });
-                                $('#taskListContainer').empty();
+                                // $('#taskListContainer').empty();
                                 getTasks(); // Refresh task list
                             } else {
                                 Swal.fire({
@@ -1046,11 +1068,14 @@ if (!isset($_SESSION['loginId'])) {
                 data: { ischecked: true, id: checkboxId, checkedTask: newcheckValue },
                 success: function (response) {
                     let arr = JSON.parse(response);
-                    console.log(arr)
+                    // console.log(arr)
 
                     if (arr.success) {
                         rander(arr.tasklist)
                     }
+                    // if (arr.completedCount) {
+                    //     $('#checkedCount').text(arr.completedCount);
+                    // }
                 }
 
             })
