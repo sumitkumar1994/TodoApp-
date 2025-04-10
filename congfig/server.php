@@ -252,25 +252,20 @@ if (isset($_POST["getdata"])) {
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
         if ($id == "important") {
-            $where = "and important='1' ";
+            $where = "and important='1' and checked ='0' ";
         } elseif ($id == "complete") {
-            $where = "and checked= '1'";
+            $where = "and checked='1'";
+        } elseif ($id == "all") {
+            $where = "and checked='0'";
+        } elseif ($id == "Tasks") {
+            $where = "";
         } else {
-            $where = "and list_id= '$id'";
-
+            $where = "and list_id='$id'";
         }
     }
-    // if (isset($_POST['id'])) {
-    //     if ($id == "important") {
-    //         $where = "and important='1'";
-    //     } elseif ($id == "complete") {
-    //         $where = "and checked= '1'";
-    //     } else {
-    //         $where = "and list_id= '$id'";
-
-    //     }
-    // }
     $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]'$where ORDER BY id DESC";
+    // $sql = "SELECT * FROM tasks where created_by ='1'$where ORDER BY id DESC";
+
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $data = [];
@@ -278,9 +273,26 @@ if (isset($_POST["getdata"])) {
             $data[] = $row;
 
         }
+        $userId = $_SESSION['loginId'];
+
+        $count_query = [
+            'all' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND checked='0'",
+            'important' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND important='1' AND checked='0'",
+            'complete' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND checked='1'",
+            'Tasks' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId'  AND checked='0'",
+            'myDay' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND list_id='MyDAY' AND checked='0'",
+            'planned' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND list_id='planned' AND checked='0'",
+        ];
+        $counts = [];
+        foreach ($count_query as $key => $query) {
+            $res = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($res);
+            $counts[$key] = $row['total'];
+        }
         $returndata['tasklist'] = $data;
         $returndata['success'] = true;
         $returndata['msg'] = 'data found';
+        $returndata['counts'] = $counts;
 
     } else {
         $returndata['msg'] = 'data not found';
@@ -423,9 +435,6 @@ if (isset($_POST['addNewList'])) {
     echo json_encode($returndata);
 
 }
-
-
-
 if (isset($_POST['fetch_list'])) {
     $checkapi = 0;
     $returndata["success"] = false;
@@ -443,7 +452,6 @@ if (isset($_POST['fetch_list'])) {
     }
     echo json_encode($returndata, true);
 }
-
 //untitled list Context Menu  delete-list Api........................................
 if (isset($_POST['deletelist'])) {
     $checkapi = 0;
@@ -534,38 +542,14 @@ if (isset($_POST['ischecked'])) {
 
     $query = "UPDATE tasks SET checked = '$checkedTask' WHERE id = $id";
     $result = mysqli_query($conn, $query);
-
-
     if ($result) {
-        $sql = "SELECT * FROM tasks where created_by ='$_SESSION[loginId]' ORDER BY id DESC";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $data = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $data[] = $row;
-            }
-        }
-        // $countQuery = "SELECT COUNT(checked) AS completedCount FROM tasks WHERE created_by = '{$_SESSION['loginId']}' AND checked = '1'";
-        // $countResult = mysqli_query($conn, $countQuery);
-        // $completedCount = 0;
-        // if ($countResult) {
-        //     $countRow = mysqli_fetch_assoc($countResult);
-        //     $completedCount = $countRow['completedCount'];
-        // }
-        $returndata['tasklist'] = $data;
-        // $returndata['completedCount'] = $completedCount;
         $returndata["success"] = true;
         $returndata['msg'] = "Task $id marked checkedTask successfully.";
     } else {
         $returndata['msg'] = "Task $id has been removed from $checkedTask successfully ";
-
     }
     echo json_encode($returndata, true);
 }
-
-
-
-
 if ($checkapi) {
     $returndata['msg'] = 'invalid api';
     echo json_encode($returndata, true);

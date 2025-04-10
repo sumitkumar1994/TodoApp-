@@ -80,21 +80,102 @@ if (!isset($_SESSION['loginId'])) {
             type="text" placeholder="Search">
 
         <ul class="space-y-2 ">
-            <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
-                data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="important">
-                <i class="fas fa-star text-yellow-400 mr-2"></i> Important
+            <!-- <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
+                data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li> -->
+            <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
+                data-id="MyDAY">
+                <!-- Left Side: Icon + Text -->
+                <div class="flex items-center">
+                    <i class="fas fa-sun text-yellow-400 mr-2"></i>
+                    <span>My Day</span>
+                </div>
+                <!-- Right Side: Count -->
+                <span class="text-sm  textwhite w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countMyDay">
+
+                </span>
             </li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="planned"><i
-                    class="fas fa-calendar-alt text-blue-400 mr-2"></i> Planned</li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2" data-id="complete">
-                <i class="fas fa-check-circle text-red-400 mr-2"></i> Completed
+
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id="important">
+
+                <div class="flex items-center">
+                    <i class="fas fa-star text-yellow-400 mr-2"></i>
+                    <span>Important</span>
+                </div>
+                <!-- Right Side: Count -->
+                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countImportant">
+
+                </span>
             </li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer  flex items-center mr-2" data-id="Assigned">
-                <i class="fas fa-user text-green-400 mr-2"></i> Assigned to me
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id="planned">
+
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt text-blue-400 mr-2"></i>
+                    <span>Planned</span>
+                </div>
+                <!-- Right Side: Count -->
+                <span class="text-sm text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countPlanned">
+
+                </span>
             </li>
-            <li class="p-1 defaultList hover:bg-teal-600  cursor-pointer  flex items-center mr-2" data-id="Tasks">
-                <i class="fas fa-tasks text-gray-400 mr-2"></i> Tasks
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id="complete">
+
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-red-400 mr-2"></i>
+                    <span> Completed</span>
+                </div>
+                <!-- Right Side: Count -->
+
+                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countComplete">
+
+                </span>
+            </li>
+            <!-- <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id=" Assigned">
+
+                <div class="flex items-center">
+                    <i class="fas fa-user text-green-400 mr-2"></i>
+                    <span> Assigned to me</span>
+                </div>
+                
+            <span
+                class="text-sm bg-gray-300 text-black/70 w-6 h-6 flex items-center justify-center rounded-full font-semibold">
+                3
+            </span>
+
+            </li> -->
+
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id="all">
+                <div class="flex items-center">
+                    <i class="fas fa-infinity text-green-400 mr-2"></i>
+                    <span> All Tasks</span>
+                </div>
+                <span class="text-s text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countAll">
+
+                </span>
+            </li>
+
+            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                data-id="Tasks">
+
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-check text-gray-400 mr-2"></i>
+                    <span> Tasks</span>
+                </div>
+                <!-- Right Side: Count -->
+                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                    id="countTasks">
+
+                </span>
+
             </li>
         </ul>
         <hr>
@@ -237,8 +318,9 @@ if (!isset($_SESSION['loginId'])) {
 
         </div>
         <!-- task container -->
-        <div class="">
+        <div>
             <div class="mt-1 overflow-y space-y-1 " id="taskListContainer">
+                <!-- <div class=" mt-4 overflow-y-auto max-h-[550px]" id="taskListContainer"> -->
 
                 <!-- <div class="flex justify-between bg-white text-black p-3 rounded shadow items-center">
                     <input type="checkbox" class="w-5 h-5">
@@ -264,55 +346,8 @@ if (!isset($_SESSION['loginId'])) {
         </div>
 
 
-        <!--  right click task container contextmenu list-->
-        <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
-                                    border border-gray-300 transition-all duration-200 ease-in-out">
 
-            <ul class="text-gray-800 font-medium">
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
-                </li>
 
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
-                </li>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
-                </li>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
-                </li>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
-                </li>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
-                </li>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
-                </li>
-            </ul>
-
-            <div class="border-t border-gray-400 mt-1 pt-1">
-                <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
-                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300"
-                    id="delete-btn" data-id="${element.id}">
-                    <i class="fa-solid fa-trash mr-3"></i> Delete Task
-                </li>
-            </div>
-        </div>
         <!-- add task input -->
         <div class="mt-auto  ">
             <form class="flex space-x-2" action="./congfig/server.php" method="POST" id="task_form">
@@ -331,6 +366,55 @@ if (!isset($_SESSION['loginId'])) {
 
 
     </main>
+    <!--  right click task container contextmenu list-->
+    <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
+                                    border border-gray-300 transition-all duration-200 ease-in-out">
+
+        <ul class="text-gray-800 font-medium">
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
+            </li>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
+                                        cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
+            </li>
+        </ul>
+
+        <div class="border-t border-gray-400 mt-1 pt-1">
+            <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
+                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300"
+                id="delete-btn" data-id="${element.id}">
+                <i class="fa-solid fa-trash mr-3"></i> Delete Task
+            </li>
+        </div>
+    </div>
 
     <!-- right sidebar -->
     <div class="fixed top-0 right-0 w-1/5 mx-auto text-black hidden sidebar-btn ">
@@ -439,9 +523,12 @@ if (!isset($_SESSION['loginId'])) {
                 let form = $('#task_form');
                 let url = form.attr('action');
                 let activeListId = $(".activeList").attr("data-id")
-                console.log(typeof activeListId);
+                // alert(activeListId)
+
+                // return false;
 
                 let formData = form.serialize();
+
                 formData += "&activeListId=" + activeListId;
 
                 if (activeListId === "important") {
@@ -459,7 +546,9 @@ if (!isset($_SESSION['loginId'])) {
                         let arr = JSON.parse(response);
                         console.log(arr);
                         if (arr.success) {
-                            rander(arr.tasklist);
+                            let listId = $('.activeList').attr('data-id')
+
+                            getTasks(listId)
                         } else {
                             alert("tasks not updated");
                         }
@@ -487,6 +576,12 @@ if (!isset($_SESSION['loginId'])) {
 
                     if (arr.success) {
                         let getTaskList = arr.tasklist;
+                        $('#countMyDay').text(arr.counts.myDay);
+                        $('#countImportant').text(arr.counts.important);
+                        $('#countComplete').text(arr.counts.complete);
+                        $('#countAll').text(arr.counts.all);
+                        $('#countTasks').text(arr.counts.Tasks);
+                        $('#countPlanned').text(arr.counts.planned)
 
                         rander(getTaskList);
 
@@ -504,6 +599,7 @@ if (!isset($_SESSION['loginId'])) {
             let iscompleteTask = ""
             let completedCount = ""
 
+
             getTaskList.forEach(element => {
                 let isimp = "text-gray-400"
                 // let completeid = $(".checkbox").attr("data-id")
@@ -519,7 +615,7 @@ if (!isset($_SESSION['loginId'])) {
                 }
                 let taskNameSpan;
                 if (ischeck === "checked") {
-                    taskNameSpan = "line-through"
+                    taskNameSpan = "line-through leading-tight "
                 } else {
                     taskNameSpan = ""
                 }
@@ -537,6 +633,7 @@ if (!isset($_SESSION['loginId'])) {
                 let taskTemplate = `
                 
                                      <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2      removeCheck${element.id} rightClick"  data-id="${element.id}"  >
+                                     
                                         
                                         <div class="flex items-center space-x-3 max-w-xs" >
                                             
@@ -566,9 +663,7 @@ if (!isset($_SESSION['loginId'])) {
             }
             $('#taskListContainer').append(html);
             $('#completeTask').append(iscompleteTask);
-            $('#checkedCount').text(completedCount);
-
-
+            $('#checkedCount').text(completedCount)
 
         }
 
@@ -612,7 +707,7 @@ if (!isset($_SESSION['loginId'])) {
         // });
         $(document).on("click", "#delete-btn", function () {
             let taskid = $(".contextMenu").data("id");
-            $(".contextMenu").fadeOut("fast");
+            // $(".contextMenu").fadeOut("fast");
             Swal.fire({
                 title: "Are you sure?",
                 text: `You want to be delete this task ${taskid}!`,
@@ -632,7 +727,7 @@ if (!isset($_SESSION['loginId'])) {
                             console.log(arr);
 
                             if (arr.success) {
-                                $(".contextMenu").hide();
+                                // $(".contextMenu").hide();
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: "Task has been deleted.",
@@ -641,7 +736,9 @@ if (!isset($_SESSION['loginId'])) {
                                     showConfirmButton: false
                                 });
                                 // $('#taskListContainer').empty();
-                                getTasks(); // Refresh task list
+                                // alert($('#taskListContainer').empty());
+                                let activeList = $('.activeList').attr('data-id');
+                                getTasks(activeList); // Refresh task list
                             } else {
                                 Swal.fire({
                                     title: "Error!",
@@ -679,18 +776,24 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on('click', 'input[type="checkbox"], .star,.defaultList', function (e) {
             e.stopPropagation();
         });
-
         $(document).on('click', '.loginUser', function () {
             $('.managesection ').toggle('hidden')
         });
-
-
         // **Context menu open logic**..........................................................
         $(document).on('contextmenu', '.rightClick', function (e) {
             e.preventDefault();
+            let menu1 = $(this).find('.contextMenu');
+            // Agar context menu already active hai, to close kar do
+            if (menu1.hasClass("active")) {
+                $(".contextMenu").removeClass("active").addClass("hidden");
+                e.stopPropagation();
+            } else {
+                //  Sidebar toggle karne ka function call karo
+                $(".sidebar-btn").toggleClass("open");
+            }
 
             // Pehle sabhi context menus ko hide karo
-            $(".contextMenu").removeClass("active").addClass("hidden");
+            // $(".contextMenu").removeClass("active").addClass("hidden");
             let itemId = $(this).data("id");
 
             // Current element ka context menu
@@ -719,19 +822,19 @@ if (!isset($_SESSION['loginId'])) {
         });
 
         // **Agar rightClick pe click karein to context menu band ho, lekin sidebar toggle ho**
-        $(document).on("click", ".rightClick", function (e) {
-            let menu = $(this).find('.contextMenu');
+        // $(document).on("click", ".rightClick", function (e) {
+        //     let menu = $(this).find('.contextMenu');
 
-            // Agar context menu already active hai, to close kar do
-            if (menu.hasClass("active")) {
-                $(".contextMenu").removeClass("active").addClass("hidden");
-            } else {
-                //  Sidebar toggle karne ka function call karo
-                $(".sidebar-btn").toggleClass("open");
-            }
+        //     // Agar context menu already active hai, to close kar do
+        //     if (menu.hasClass("active")) {
+        //         $(".contextMenu").removeClass("active").addClass("hidden");
+        //     } else {
+        //         //  Sidebar toggle karne ka function call karo
+        //         $(".sidebar-btn").toggleClass("open");
+        //     }
 
-            e.stopPropagation();
-        });
+        //     e.stopPropagation();
+        // });
 
         // **Context menu ke andar click karne pe kuch na ho**
         $(document).on("click", ".contextMenu", function (e) {
@@ -739,13 +842,13 @@ if (!isset($_SESSION['loginId'])) {
         });
 
         // **Sidebar ka event tabhi chale jab context menu active na ho**
-        $(document).on("click", ".rightClick", function (e) {
-            if ($(".contextMenu").hasClass("active")) {
-                return false; // Sidebar event trigger hone se rokta hai
+        // $(document).on("click", ".rightClick", function (e) {
+        //     if ($(".contextMenu").hasClass("active")) {
+        //         return false; // Sidebar event trigger hone se rokta hai
 
-            }
-            e.stopPropagation();
-        });
+        //     }
+        //     e.stopPropagation();
+        // });
 
         // add new list ......................................................
         $(document).on('click', '#new-list-btn', function () {
@@ -1071,7 +1174,10 @@ if (!isset($_SESSION['loginId'])) {
                     // console.log(arr)
 
                     if (arr.success) {
-                        rander(arr.tasklist)
+                        let listId = $('.activeList').attr('data-id')
+                        // console.log(listId)
+                        getTasks(listId)
+
                     }
                     // if (arr.completedCount) {
                     //     $('#checkedCount').text(arr.completedCount);
