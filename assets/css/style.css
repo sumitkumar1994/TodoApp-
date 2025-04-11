@@ -150,3 +150,14 @@
 .custom-lists::-webkit-scrollbar-track {
   background: transparent; /* No track visible */
 }
+/* jb v delet-btn pe clcck ho tocontextmenu hide ho jaye  */
+.contextMenu {
+  position: absolute;
+  z-index: 9999;
+  transition: opacity 0.2s ease;
+}
+.contextMenu.hidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none; /* Optional, can add if you want */
+}

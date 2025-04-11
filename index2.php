@@ -83,7 +83,7 @@ if (!isset($_SESSION['loginId'])) {
             <!-- <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
                 data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li> -->
             <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
-                data-id="MyDAY">
+                data-id="MyDAY" data-name="My Day" data-icon="fas fa-sun text-yellow-400 mr-2">
                 <!-- Left Side: Icon + Text -->
                 <div class="flex items-center">
                     <i class="fas fa-sun text-yellow-400 mr-2"></i>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['loginId'])) {
             </li>
 
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="important">
+                data-id="important" data-name="Important" data-icon="fas fa-star text-yellow-400 mr-2">
 
                 <div class="flex items-center">
                     <i class="fas fa-star text-yellow-400 mr-2"></i>
@@ -110,10 +110,10 @@ if (!isset($_SESSION['loginId'])) {
                 </span>
             </li>
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="planned">
+                data-id="planned" data-name="Planned" data-icon="fas fa-calendar-alt text-blue-800 mr-2">
 
                 <div class="flex items-center">
-                    <i class="fas fa-calendar-alt text-blue-400 mr-2"></i>
+                    <i class="fas fa-calendar-alt text-blue-800 mr-2"></i>
                     <span>Planned</span>
                 </div>
                 <!-- Right Side: Count -->
@@ -123,10 +123,10 @@ if (!isset($_SESSION['loginId'])) {
                 </span>
             </li>
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="complete">
+                data-id="complete" data-name="Complete" data-icon="fas fa-check-circle  text-red-500 mr-2">
 
                 <div class="flex items-center">
-                    <i class="fas fa-check-circle text-red-400 mr-2"></i>
+                    <i class="fas fa-check-circle text-red-500 mr-2"></i>
                     <span> Completed</span>
                 </div>
                 <!-- Right Side: Count -->
@@ -152,10 +152,10 @@ if (!isset($_SESSION['loginId'])) {
             </li> -->
 
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="all">
+                data-id="all" data-name="All" data-icon="fas fa-infinity text-green-300 mr-2">
                 <div class="flex items-center">
-                    <i class="fas fa-infinity text-green-400 mr-2"></i>
-                    <span> All Tasks</span>
+                    <i class="fas fa-infinity text-green-300 mr-2"></i>
+                    <span> All </span>
                 </div>
                 <span class="text-s text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
                     id="countAll">
@@ -164,10 +164,10 @@ if (!isset($_SESSION['loginId'])) {
             </li>
 
             <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="Tasks">
+                data-id="Tasks" data-name="Tasks" data-icon="fas fa-calendar-check text-rose-950 mr-2">
 
                 <div class="flex items-center">
-                    <i class="fas fa-calendar-check text-gray-400 mr-2"></i>
+                    <i class="fas fa-calendar-check text-rose-950 mr-2"></i>
                     <span> Tasks</span>
                 </div>
                 <!-- Right Side: Count -->
@@ -294,8 +294,13 @@ if (!isset($_SESSION['loginId'])) {
 
     <!-- Main Content -->
     <main class="p-3 flex flex-col w-4/5 manageSection " is_open="0">
-        <div class="flex justify-end  space-x-2">
-            <div class="space-x-2">
+        <!-- <div class="flex justify-end  space-x-2"> -->
+        <div class="flex justify-between  space-x-2">
+            <!-- <div  class="text-xl font-semibold mb-3"> </div> -->
+            <div id="activeListName" class="flex items-center text-xl font-semibold mb-3"">
+                 
+            </div>
+            <div class=" space-x-2">
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
                         class="fas fa-image"></i></button>
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
@@ -303,18 +308,7 @@ if (!isset($_SESSION['loginId'])) {
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
                         class="fas fa-ellipsis-h"></i></button>
             </div>
-            <?php if (isset($_SESSION['loginId']) && $_SESSION['loginId'] !== '') { ?>
-                <form action="./congfig/server.php" method="post">
-                    <!-- <button class="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600"
-                        name="logout">Logout</button> -->
-                </form>
-            <?php } else { ?>
 
-                <button class="bg-blue-500 text-black px-4 py-2 rounded-sm hover:bg-blue-600">login</button>
-
-                <button class="bg-blue-500 text-black px-4 py-2 rounded-sm hover:bg-blue-600">signUP</button>
-
-            <?php } ?>
 
         </div>
         <!-- task container -->
@@ -706,8 +700,18 @@ if (!isset($_SESSION['loginId'])) {
         //     }
         // });
         $(document).on("click", "#delete-btn", function () {
-            let taskid = $(".contextMenu").data("id");
+            let taskid = $(".contextMenu").attr("data-id");
+
             // $(".contextMenu").fadeOut("fast");
+            if (!taskid) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error: No List ID found!",
+                });
+                return;
+            }
+            $(".contextMenu").addClass("hidden  ");
             Swal.fire({
                 title: "Are you sure?",
                 text: `You want to be delete this task ${taskid}!`,
@@ -717,6 +721,7 @@ if (!isset($_SESSION['loginId'])) {
                 cancelButtonColor: "#3085d6",
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
+                // $(".contextMenu").remove()
                 if (result.isConfirmed) {
                     $.ajax({
                         url: "./congfig/server.php", // Corrected URL
@@ -727,7 +732,6 @@ if (!isset($_SESSION['loginId'])) {
                             console.log(arr);
 
                             if (arr.success) {
-                                // $(".contextMenu").hide();
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: "Task has been deleted.",
@@ -1102,6 +1106,11 @@ if (!isset($_SESSION['loginId'])) {
             // Ab jispe click kiya hai usko active class add karo
             $(this).addClass("activeList bg-teal-500 text-white font-bold");
             let Id = $(this).attr("data-id")
+            let listName = $(this).attr("data-name");
+            let iconClass = $(this).attr("data-icon");
+            // alert(iconClass);
+            $("#activeListName").html(` <i class="${iconClass}"></i> ${listName}`);
+
             getTasks(Id)
             let listid = $(this).attr("data-id")
             if (listid == "complete" || listid == "Assigned") {
@@ -1148,6 +1157,9 @@ if (!isset($_SESSION['loginId'])) {
                             $(".isImp" + starId).addClass("text-yellow-500").removeClass("text-gray-400");
 
                         }
+                        let activeList = $('.activeList').attr('data-id')
+                        getTasks(activeList)
+
                     }
                 }
             });
