@@ -33,8 +33,7 @@ if (!isset($_SESSION['loginId'])) {
 
     <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
-    <nav
-        class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
+    <nav class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3  flex flex-col space-y-4 border-r border-white  ">
         <div class="flex items-center space-x-3  loginUser  ">
             <div
                 class=" border-b-amber-800 border h-10 w-10 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
@@ -50,195 +49,154 @@ if (!isset($_SESSION['loginId'])) {
                 </p>
             </div>
         </div>
-        <div
-            class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[50px] left-[10px]   managesection  border border-gray-300 ">
 
-            <ul class="text-gray-800 font-medium ">
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                    cursor-pointer rounded-lg " id="openModal" type="button"><i
-                        class="fa-solid  fa-users fa-flip mr-3 text-yellow-500"></i>ManageAccounts
-                </li>
-                <hr>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                    cursor-pointer rounded-lg  ">
-                    <i class="fa-solid fa-cog fa-spin mr-3 text-yellow-700"></i> Satting
-                </li>
-                <hr>
-
-                <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                    cursor-pointer rounded-lg  ">
-                    <i class="fa-solid fa-sync fa-spin mr-3 text-green-600"></i> Sync
-                </li>
-            </ul>
-
-        </div>
 
 
         <input
             class="w-[97%]  max-md p-2 -mr-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300  focus:ring focus:ring-teal-500 focus:outline-none"
             type="text" placeholder="Search">
 
-        <ul class="space-y-2 ">
-            <!-- <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
-                data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li> -->
-            <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
-                data-id="MyDAY" data-name="My Day" data-icon="fas fa-sun text-yellow-400 mr-2">
-                <!-- Left Side: Icon + Text -->
-                <div class="flex items-center">
-                    <i class="fas fa-sun text-yellow-400 mr-2"></i>
-                    <span>My Day</span>
-                </div>
-                <!-- Right Side: Count -->
-                <span class="text-sm  textwhite w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countMyDay">
 
-                </span>
-            </li>
+        <div class="scrol-lists overflow-y-auto max-h-[80vh] ">
+            <ul class="space-y-2 ">
+                <!-- <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
+                    data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li> -->
+                <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
+                    data-id="MyDAY" data-name="My Day" data-icon="fas fa-sun text-yellow-400 mr-2">
+                    <!-- Left Side: Icon + Text -->
+                    <div class="flex items-center">
+                        <i class="fas fa-sun text-yellow-400 mr-2"></i>
+                        <span>My Day</span>
+                    </div>
+                    <!-- Right Side: Count -->
+                    <span class="text-sm  textwhite w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countMyDay">
 
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="important" data-name="Important" data-icon="fas fa-star text-yellow-400 mr-2">
-
-                <div class="flex items-center">
-                    <i class="fas fa-star text-yellow-400 mr-2"></i>
-                    <span>Important</span>
-                </div>
-                <!-- Right Side: Count -->
-                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countImportant">
-
-                </span>
-            </li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="planned" data-name="Planned" data-icon="fas fa-calendar-alt text-blue-800 mr-2">
-
-                <div class="flex items-center">
-                    <i class="fas fa-calendar-alt text-blue-800 mr-2"></i>
-                    <span>Planned</span>
-                </div>
-                <!-- Right Side: Count -->
-                <span class="text-sm text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countPlanned">
-
-                </span>
-            </li>
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="complete" data-name="Complete" data-icon="fas fa-check-circle  text-red-500 mr-2">
-
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-red-500 mr-2"></i>
-                    <span> Completed</span>
-                </div>
-                <!-- Right Side: Count -->
-
-                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countComplete">
-
-                </span>
-            </li>
-            <!-- <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id=" Assigned">
-
-                <div class="flex items-center">
-                    <i class="fas fa-user text-green-400 mr-2"></i>
-                    <span> Assigned to me</span>
-                </div>
-                
-            <span
-                class="text-sm bg-gray-300 text-black/70 w-6 h-6 flex items-center justify-center rounded-full font-semibold">
-                3
-            </span>
-
-            </li> -->
-
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="all" data-name="All" data-icon="fas fa-infinity text-green-300 mr-2">
-                <div class="flex items-center">
-                    <i class="fas fa-infinity text-green-300 mr-2"></i>
-                    <span> All </span>
-                </div>
-                <span class="text-s text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countAll">
-
-                </span>
-            </li>
-
-            <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
-                data-id="Tasks" data-name="Tasks" data-icon="fas fa-calendar-check text-rose-950 mr-2">
-
-                <div class="flex items-center">
-                    <i class="fas fa-calendar-check text-rose-950 mr-2"></i>
-                    <span> Tasks</span>
-                </div>
-                <!-- Right Side: Count -->
-                <span class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
-                    id="countTasks">
-
-                </span>
-
-            </li>
-        </ul>
-        <hr>
-        <!-- Scrollable List -->
-        <input type="hidden" class="activeInput">
-        <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  ">
-        </ul>
-        <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
-            <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
-        </li> -->
-        </ul>
-
-        <!-- untitlelist contestmenu......................................................... -->
-
-        <div id="listcontextMenu"
-            class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
-            <ul class="text-gray-800 font-medium">
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
-                    <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
+                    </span>
                 </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
+
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id="important" data-name="Important" data-icon="fas fa-star text-yellow-400 mr-2">
+
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        <span>Important</span>
+                    </div>
+                    <!-- Right Side: Count -->
+                    <span
+                        class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countImportant">
+
+                    </span>
                 </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id="planned" data-name="Planned" data-icon="fas fa-calendar-alt text-blue-800 mr-2">
+
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-alt text-blue-800 mr-2"></i>
+                        <span>Planned</span>
+                    </div>
+                    <!-- Right Side: Count -->
+                    <span class="text-sm text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countPlanned">
+
+                    </span>
                 </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
+
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id="complete" data-name="Completed" data-icon="fas fa-check-circle  text-red-500 mr-2">
+
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-red-500 mr-2"></i>
+                        <span> Completed</span>
+                    </div>
+                    <!-- Right Side: Count -->
+
+                    <span
+                        class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countComplete">
+
+                    </span>
                 </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
+
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id="all" data-name="All" data-icon="fas fa-infinity text-green-300 mr-2">
+                    <div class="flex items-center">
+                        <i class="fas fa-infinity text-green-300 mr-2"></i>
+                        <span> All </span>
+                    </div>
+                    <span class="text-s text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countAll">
+
+                    </span>
                 </li>
-                <li
-                    class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
-                    <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id=" Assigned">
+
+                    <div class="flex items-center">
+                        <i class="fas fa-user text-green-400 mr-2"></i>
+                        <span> Assigned to me</span>
+                    </div>
+
+                    <span
+                        class="text-sm  text-black/70 w-6 h-6 flex items-center justify-center rounded-full font-semibold">
+
+                    </span>
+                </li>
+
+                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                    data-id="Tasks" data-name="Tasks" data-icon="fas fa-calendar-check text-rose-950 mr-2">
+
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-check text-rose-950 mr-2"></i>
+                        <span> Tasks</span>
+                    </div>
+                    <!-- Right Side: Count -->
+                    <span
+                        class="text-sm  text-white w-6 h-6 flex items-center justify-center rounded-full font-semibold"
+                        id="countTasks">
+
+                    </span>
+
                 </li>
             </ul>
-            <div class="border-t border-gray-400 mt-1 pt-1">
-                <li type="submit"
-                    class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
-                    <i class="fa-solid fa-trash mr-3"></i> Delete list
-                </li>
-            </div>
-        </div>
-        <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
-            id="new-list-btn">
-            <i class="fas fa-plus mr-2"></i> New List
-        </button> -->
-        <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
-            transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
-            border border-white/20 backdrop-blur-xl overflow-hidden mr-2 flex items-center justify-center"
-            id="new-list-btn">
-            <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
-            <span class="relative flex items-center justify-center space-x-2">
-                <i class="fas fa-plus text-lg"></i>
+            <hr>
+            <!-- Scrollable List -->
+            <input type="hidden" class="activeInput">
+            <ul class="custom-lists    max-h-[245px] ">
+                <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
+                    <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
+                </li> -->
+            </ul>
+            <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
+                id="new-list-btn">
+                <i class="fas fa-plus mr-2"></i> New List
+            </button> -->
+            <!-- <button
+                class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold 
+                    py-2 px-8 sm:px-6 md:px-4 w-full rounded-md 
+                    transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
+                    border border-white/20 backdrop-blur-xl  flex items-center justify-center text-sm sm:text-base md:text-lg"
+                id="new-list-btn"> -->
+
+            <!-- <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span> -->
+
+            <!-- <span class="relative flex items-center justify-center space-x-2">
+                    <i class="fas fa-plus text-base sm:text-lg"></i>
+                    <span>New List</span>
+                </span>
+            </button> -->
+            <button
+                class=" w-[19%] fixed bottom-2 py-1  bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-md"
+                id="new-list-btn">
+
+                <span class=" text-white font-bold text-xl">+</span>
                 <span>New List</span>
-            </span>
-        </button>
+            </button>
+
+        </div>
+
+
     </nav>
     <!-- Modal Background (Hidden by default) -->
     <div id="modalBg" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center">
@@ -312,8 +270,8 @@ if (!isset($_SESSION['loginId'])) {
 
         </div>
         <!-- task container -->
-        <div>
-            <div class="mt-1 overflow-y space-y-1 " id="taskListContainer">
+        <div class="mt-1 max-h-[82vh] overflow-auto" id="taskListscrollbar">
+            <div class="" id="taskListContainer">
                 <!-- <div class=" mt-4 overflow-y-auto max-h-[550px]" id="taskListContainer"> -->
 
                 <!-- <div class="flex justify-between bg-white text-black p-3 rounded shadow items-center">
@@ -356,9 +314,6 @@ if (!isset($_SESSION['loginId'])) {
                 </button>
             </form>
         </div>
-
-
-
     </main>
     <!--  right click task container contextmenu list-->
     <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
@@ -406,6 +361,67 @@ if (!isset($_SESSION['loginId'])) {
                                         from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300"
                 id="delete-btn" data-id="${element.id}">
                 <i class="fa-solid fa-trash mr-3"></i> Delete Task
+            </li>
+        </div>
+    </div>
+    <!-- user manage acount -->
+    <div
+        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[50px] left-[10px]   managesection  border border-gray-300 ">
+
+        <ul class="text-gray-800 font-medium ">
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
+                        cursor-pointer rounded-lg " id="openModal" type="button"><i
+                    class="fa-solid  fa-users fa-flip mr-3 text-yellow-500"></i>ManageAccounts
+            </li>
+            <hr>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
+                        cursor-pointer rounded-lg  ">
+                <i class="fa-solid fa-cog fa-spin mr-3 text-yellow-700"></i> Satting
+            </li>
+            <hr>
+
+            <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
+                        cursor-pointer rounded-lg  ">
+                <i class="fa-solid fa-sync fa-spin mr-3 text-green-600"></i> Sync
+            </li>
+        </ul>
+
+    </div>
+    <!-- untitlelist contestmenu......................................................... -->
+
+    <div id="listcontextMenu"
+        class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
+        <ul class="text-gray-800 font-medium">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
+                <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
+            </li>
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
+                <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
+            </li>
+        </ul>
+        <div class="border-t border-gray-400 mt-1 pt-1">
+            <li type="submit"
+                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
+                <i class="fa-solid fa-trash mr-3"></i> Delete list
             </li>
         </div>
     </div>

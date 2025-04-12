@@ -133,21 +133,21 @@
 }
 /* new list scrool bar........................................................ */
 
-/* Custom Scrollbar for .custom-lists */
-.custom-lists::-webkit-scrollbar {
+/* Custom-list Scrollbar for .custom-lists */
+.scrol-lists::-webkit-scrollbar {
   width: 4px; /* Thin scrollbar */
 }
 
-.custom-lists::-webkit-scrollbar-thumb {
+.scrol-lists::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
   border-radius: 10px;
 }
 
-.custom-lists::-webkit-scrollbar-thumb:hover {
+.scrol-lists::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
 }
 
-.custom-lists::-webkit-scrollbar-track {
+.scrol-lists::-webkit-scrollbar-track {
   background: transparent; /* No track visible */
 }
 /* jb v delet-btn pe clcck ho tocontextmenu hide ho jaye  */
@@ -160,4 +160,22 @@
   opacity: 0;
   pointer-events: none;
   display: none; /* Optional, can add if you want */
+}
+/* tasklistcontainerscrollbar.................................... */
+
+#taskListscrollbar::-webkit-scrollbar {
+  width: 4px; /* Thin scrollbar */
+}
+
+#taskListscrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  border-radius: 10px;
+}
+
+#taskListscrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
+}
+
+#taskListscrollbar::-webkit-scrollbar-track {
+  background: transparent; /* No track visible */
 }

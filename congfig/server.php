@@ -259,6 +259,8 @@ if (isset($_POST["getdata"])) {
             $where = "and checked='0'";
         } elseif ($id == "Tasks") {
             $where = "";
+        } elseif ($id == "MyDAY") {
+            $where = "AND (list_id='planned' OR list_id='MyDAY')";
         } else {
             $where = "and list_id='$id'";
         }
@@ -280,7 +282,7 @@ if (isset($_POST["getdata"])) {
             'important' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND important='1' AND checked='0'",
             'complete' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND checked='1'",
             'Tasks' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId'  AND checked='0'",
-            'myDay' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND list_id='MyDAY' AND checked='0'",
+            'myDay' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND (list_id='planned' OR list_id='MyDAY') AND checked='0'",
             'planned' => "SELECT COUNT(*) as total FROM tasks WHERE created_by='$userId' AND list_id='planned' AND checked='0'",
         ];
         $counts = [];
