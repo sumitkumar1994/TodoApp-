@@ -29,11 +29,11 @@ if (!isset($_SESSION['loginId'])) {
 </head>
 
 
-<body class="bg-gradient-to-br from-green-500 to-teal-600 text-white min-h-screen flex box-border  ">
+<body class="bg-gradient-to-br from-rose-700 to-rose-900 text-white min-h-screen flex box-border  ">
 
     <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
-    <nav class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3  flex flex-col space-y-4 border-r border-white  ">
+    <nav class="w-1/5 h-screen overflow-hidden  bg-pink-900 pl-2 pt-3  flex flex-col space-y-4 border-r border-white  ">
         <div class="flex items-center space-x-3  loginUser  ">
             <div
                 class=" border-b-amber-800 border h-10 w-10 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
@@ -61,7 +61,7 @@ if (!isset($_SESSION['loginId'])) {
             <ul class="space-y-2 ">
                 <!-- <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center mr-2 "
                     data-id="MyDAY"><i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day</li> -->
-                <li class="p-1 defaultList hover:bg-teal-600 activeList bg-teal-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
+                <li class="p-1 defaultList hover:bg-rose-500 activeList bg-rose-500 text-white font-bold cursor-pointer flex items-center justify-between mr-2"
                     data-id="MyDAY" data-name="My Day" data-icon="fas fa-sun text-yellow-400 mr-2">
                     <!-- Left Side: Icon + Text -->
                     <div class="flex items-center">
@@ -75,7 +75,7 @@ if (!isset($_SESSION['loginId'])) {
                     </span>
                 </li>
 
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600  cursor-pointer flex items-center mr-2 justify-between"
                     data-id="important" data-name="Important" data-icon="fas fa-star text-yellow-400 mr-2">
 
                     <div class="flex items-center">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['loginId'])) {
 
                     </span>
                 </li>
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
                     data-id="planned" data-name="Planned" data-icon="fas fa-calendar-alt text-blue-800 mr-2">
 
                     <div class="flex items-center">
@@ -103,7 +103,7 @@ if (!isset($_SESSION['loginId'])) {
                     </span>
                 </li>
 
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
                     data-id="complete" data-name="Completed" data-icon="fas fa-check-circle  text-red-500 mr-2">
 
                     <div class="flex items-center">
@@ -119,7 +119,7 @@ if (!isset($_SESSION['loginId'])) {
                     </span>
                 </li>
 
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
                     data-id="all" data-name="All" data-icon="fas fa-infinity text-green-300 mr-2">
                     <div class="flex items-center">
                         <i class="fas fa-infinity text-green-300 mr-2"></i>
@@ -130,7 +130,7 @@ if (!isset($_SESSION['loginId'])) {
 
                     </span>
                 </li>
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
                     data-id=" Assigned">
 
                     <div class="flex items-center">
@@ -144,7 +144,7 @@ if (!isset($_SESSION['loginId'])) {
                     </span>
                 </li>
 
-                <li class="p-1 defaultList hover:bg-teal-600 cursor-pointer flex items-center mr-2 justify-between"
+                <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
                     data-id="Tasks" data-name="Tasks" data-icon="fas fa-calendar-check text-rose-950 mr-2">
 
                     <div class="flex items-center">
@@ -187,7 +187,7 @@ if (!isset($_SESSION['loginId'])) {
                 </span>
             </button> -->
             <button
-                class=" w-[19%] fixed bottom-2 py-1  bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-md"
+                class=" w-[19%] fixed bottom-2 py-1  bg-gradient-to-r from-rose-500 to-rose-900 text-white font-bold rounded-md"
                 id="new-list-btn">
 
                 <span class=" text-white font-bold text-xl">+</span>
@@ -251,12 +251,12 @@ if (!isset($_SESSION['loginId'])) {
 
 
     <!-- Main Content -->
-    <main class="p-3 flex flex-col w-4/5 manageSection " is_open="0">
+    <main class="p-3 flex flex-col w-4/5 manageSection changeColor  " is_open="0">
         <!-- <div class="flex justify-end  space-x-2"> -->
         <div class="flex justify-between  space-x-2">
             <!-- <div  class="text-xl font-semibold mb-3"> </div> -->
             <div id="activeListName" class="flex items-center text-xl font-semibold mb-3"">
-                 
+             <i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day
             </div>
             <div class=" space-x-2">
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
@@ -285,11 +285,11 @@ if (!isset($_SESSION['loginId'])) {
                 </div> -->
 
             </div>
-            <div class="w-36  bg-gray-200 p-1 rounded hover:bg-white" id="completeHeader">
+            <div class="w-36  bg-gray-200 p-1 rounded-sm hover:bg-white" id="completeHeader">
 
                 <i id="downIcon" class="fas fa-chevron-down text-gray-500 ml-2"></i>
                 <i id="rightIcon" class="fas fa-angle-right text-gray-500 ml-2 hidden"></i>
-                <span class="text-green-700 font-semibold pl-2">Complete</span>
+                <span class="text-green-700 font-semibold pl-2">Completed</span>
                 <span id="checkedCount" class="text-gray-500  font-semibold"></span>
 
             </div>
@@ -309,7 +309,7 @@ if (!isset($_SESSION['loginId'])) {
                 <input type="text" class="flex-1 p-2 rounded-sm bg-white text-black focus:ring " placeholder="Add task"
                     name="task" id="task">
                 <button type="submit" id="taskBtn"
-                    class="bg-green-500 text-white px-4 py-2 rounded-sm hover:bg-green-600">
+                    class="bg-rose-400 text-white px-4 py-2 rounded-sm hover:bg-rose-600">
                     <i class="fas fa-plus"></i>
                 </button>
             </form>
@@ -494,19 +494,16 @@ if (!isset($_SESSION['loginId'])) {
     <script>
         $(document).ready(function () {
             let activeListId = $(".activeList").data("id")
-            // alert(activeListId);
             getTasks(activeListId);
-
             listDataRender();
-            // renderDefaultList();
-        })
+        });
 
 
         $(document).on("click", "#taskBtn", function (e) {
             e.preventDefault();
             let task = $('#task').val().trim();
 
-            // alert(task);
+            // alxxert(task);
             // return false;
             let error = 0;
             if (task === '') {
@@ -547,6 +544,7 @@ if (!isset($_SESSION['loginId'])) {
                 if (activeListId === "checked") {
                     formData += "&checked=1";
                 }
+
 
                 $.ajax({
                     url: url,
@@ -630,32 +628,49 @@ if (!isset($_SESSION['loginId'])) {
                     taskNameSpan = ""
                 }
 
+                let subText = "";
+                let currentListId = $(".activeList").attr("data-id");
+                // alert(currentListId);
+                // Agar current list wahi list hai jisme task add hua tha → subText empty rahe
+                if (currentListId == 'MyDAY' || currentListId === "planned" || (element.important == 1 && currentListId != 'complete' && currentListId != 'all')) {
+                    subText = `<div class="text-sm text-gray-500 ">Task</div>`;
+                } else if (currentListId == 'all' || currentListId == 'Tasks') {
+                    if (element.list_id == 'MyDAY') {
+                        subText = `<div class="text-sm text-gray-500 ">My Day</div>`
+                    }
+                } else if (currentListId == 'complete') {
+                    subText = `<div class="text-sm text-gray-500 "></div>`;
+                }
 
-                // // Task name styling based on checked status
-                // let taskNameSpan = "";
-                // if (ischeck === "checked") {
-                //     taskNameSpan = `<span class="flex-grow text-lg text-gray-500 line-through" data-id="${element.list_id}">complete</span>`;
-                // } else {
-                //     taskNameSpan = `<span class="flex-grow text-lg text-gray-900" data-id="${element.list_id}">complele</span>`;
-                // }
 
+                let taskTemplate = `    
+                    
+                      <div class="flex justify-between bg-white text-black p-1 rounded-sm shadow-sm items-start sidebar mr-5 mt-1 mb-1 removeCheck${element.id} rightClick" data-id="${element.id}">
 
-                let taskTemplate = `
-                
-                                     <div class="flex justify-between bg-white text-black p-2 rounded-sm shadow items-center sidebar mr-5 mt-2 mb-2      removeCheck${element.id} rightClick"  data-id="${element.id}"  >
-                                     
-                                        
-                                        <div class="flex items-center space-x-3 max-w-xs" >
-                                            
-                                                <input type="checkbox" class="w-4 h-4  checkbox ischeck${element.id} " ${ischeck} data-id="${element.id}"data-check="${element.checked}">
-                                                <span class="flex-grow text-lg text-gray-900   font-[5px] ${taskNameSpan} "data-id="${element.list_id}">${element.task_name}</span>
+                                        <!-- Left Side: Checkbox + Task Info -->
+                                        <div class="flex items-start space-x-3 w-full max-w-sm">
+
+                                            <!-- Checkbox -->
+                                            <input type="checkbox" class="w-4 h-4 mt-1 checkbox ischeck${element.id}" ${ischeck} data-id="${element.id}" data-check="${element.checked}">
+
+                                            <!-- Task Name + Sub Info -->
+                                            <div class="flex flex-col">
+                                            <span class="text-[16px] font-medium text-gray-900 ${taskNameSpan}" data-id="${element.list_id}">
+                                                ${element.task_name}
+                                            </span>
+                                            <span class="text-sm text-gray-500 mt-0.5 h-5">${subText}</span>
                                             </div>
-                                                
-                                            <div class="flex items-center space-x-2">
-                                                    <span class="${isimp} text-lg star isImp${element.id}  "data-id="${element.id}" data-imp="${element.important}"><i class="fas fa-star"></i></span>
-                                            </div>
-                                </div> 
-                `;
+                                        </div>
+
+                                        <!-- Right Side: Star -->
+                                        <div class="flex items-center space-x-2 ml-4">
+                                            <span class="${isimp} text-lg star isImp${element.id}" data-id="${element.id}" data-imp="${element.important}">
+                                            <i class="fas fa-star"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                    `;
                 if (element.checked == 1) {
                     iscompleteTask += taskTemplate;
                     completedCount++
@@ -778,10 +793,11 @@ if (!isset($_SESSION['loginId'])) {
             if ($(".contextMenu").hasClass("active")) {
                 return false;
             }
+            // right sidebar open krne ke liye 
+            $(".sidebar-btn").fadeToggle();
 
             let is_open = $('.manageSection').attr("is_open");
 
-            $(".sidebar-btn").fadeToggle();
 
             if (is_open == "0") {
                 $(".manageSection").removeClass("w-4/5").addClass("w-3/5").attr("is_open", "1");
@@ -929,7 +945,7 @@ if (!isset($_SESSION['loginId'])) {
             // $(".custom-lists").html(''); // Pehle existing list clear karni
             data.map((element, index) => {
                 let html = `
-                                <li class="p-1 mr-2     cursor-pointer flex items-center list-item hover:bg-teal-500" data-id="${element.id} ">
+                                <li class="p-1 mr-2     cursor-pointer flex items-center list-item hover:bg-rose-600" data-id="${element.id} ">
                                     <i class="fa-solid fa-bars  text-blue-300 mr-2"></i>
                                     <span class=" list-text ${span} px-1  py-1 listSpan listSpan${element.id} ">
                                         ${element.list_name} 
@@ -1117,15 +1133,11 @@ if (!isset($_SESSION['loginId'])) {
         // }
         $(document).on("click", ".defaultList ", function () {
             // Pehle sabhi list items se active class hatao
-            $(".defaultList").removeClass("activeList bg-teal-500 text-white font-bold");
+            $(".defaultList").removeClass("activeList bg-rose-500 text-white font-bold");
 
             // Ab jispe click kiya hai usko active class add karo
-            $(this).addClass("activeList bg-teal-500 text-white font-bold");
+            $(this).addClass("activeList bg-rose-500 text-white font-bold");
             let Id = $(this).attr("data-id")
-            let listName = $(this).attr("data-name");
-            let iconClass = $(this).attr("data-icon");
-            // alert(iconClass);
-            $("#activeListName").html(` <i class="${iconClass}"></i> ${listName}`);
 
             getTasks(Id)
             let listid = $(this).attr("data-id")
@@ -1134,6 +1146,23 @@ if (!isset($_SESSION['loginId'])) {
             } else {
                 $("#task_form").show()
             }
+            let listName = $(this).attr("data-name");
+            let iconClass = $(this).attr("data-icon");
+            // alert(iconClass);
+            $("#activeListName").html(` <i class="${iconClass}"></i> ${listName}`);
+
+            let randomColor = getRandomColor();
+            $('.changeColor').css('background-color', randomColor);
+            function getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                let opacityHex = '66'; // 40% opacity (66 in hex)
+                return color + opacityHex;
+            }
+
 
         });
         $(document).on("click", ".star", function () {
