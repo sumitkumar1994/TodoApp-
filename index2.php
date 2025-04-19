@@ -29,11 +29,18 @@ if (!isset($_SESSION['loginId'])) {
 </head>
 
 
-<body class="bg-gradient-to-br from-rose-700 to-rose-900 text-white min-h-screen flex box-border  ">
+<body class="bg-gradient-to-br from-rose-700 to-rose-900 text-white min-h-screen flex box-border  overflow-hidden ">
 
     <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
-    <nav class="w-1/5 h-screen overflow-hidden  bg-pink-900 pl-2 pt-3  flex flex-col space-y-4 border-r border-white  ">
+    <nav class="w-1/5 h-screen overflow-hidden  bg-pink-900 pl-2  pt-3 flex flex-col space-y-4 border-r border-white  ">
+        <!-- <nav class="w-1/5 h-screen overflow-hidden bg-pink-900 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white transition-all duration-300 
+    max-md:fixed max-md:left-0 max-md:top-0 max-md:z-50 max-md:w-64 max-md:-translate-x-full" id="leftSidebar"> -->
+
+        <!-- <button id="toggleSidebar"
+            class="md:hidden fixed top-4 left-0 z-50 bg-white text-black p-2 rounded shadow hover:bg-gray-200">
+            <i class="fas fa-bars"></i>
+        </button> -->
         <div class="flex items-center space-x-3  loginUser  ">
             <div
                 class=" border-b-amber-800 border h-10 w-10 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
@@ -45,7 +52,7 @@ if (!isset($_SESSION['loginId'])) {
                     <?php echo ($_SESSION['loginuserData']['name']) ?>
                 </p>
                 <p class=" text-gray-300">
-                    <?php echo ($_SESSION['loginuserData']['mobileno']) ?>
+                    <?php echo ($_SESSION['loginuserData']['email']) ?>
                 </p>
             </div>
         </div>
@@ -131,7 +138,7 @@ if (!isset($_SESSION['loginId'])) {
                     </span>
                 </li>
                 <li class="p-1 defaultList hover:bg-rose-600 cursor-pointer flex items-center mr-2 justify-between"
-                    data-id=" Assigned">
+                    data-id="Assigned" data-icon="fas fa-user text-green-400 mr-2">
 
                     <div class="flex items-center">
                         <i class="fas fa-user text-green-400 mr-2"></i>
@@ -168,24 +175,7 @@ if (!isset($_SESSION['loginId'])) {
                     <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
                 </li> -->
             </ul>
-            <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
-                id="new-list-btn">
-                <i class="fas fa-plus mr-2"></i> New List
-            </button> -->
-            <!-- <button
-                class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold 
-                    py-2 px-8 sm:px-6 md:px-4 w-full rounded-md 
-                    transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
-                    border border-white/20 backdrop-blur-xl  flex items-center justify-center text-sm sm:text-base md:text-lg"
-                id="new-list-btn"> -->
 
-            <!-- <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span> -->
-
-            <!-- <span class="relative flex items-center justify-center space-x-2">
-                    <i class="fas fa-plus text-base sm:text-lg"></i>
-                    <span>New List</span>
-                </span>
-            </button> -->
             <button
                 class=" w-[19%] fixed bottom-2 py-1  bg-gradient-to-r from-rose-500 to-rose-900 text-white font-bold rounded-md"
                 id="new-list-btn">
@@ -203,7 +193,7 @@ if (!isset($_SESSION['loginId'])) {
 
         <!-- Modal Box -->
         <div id="modalBox"
-            class=" bg-white/70 backdrop-blur-lg p-1 rounded-lg shadow-xl w-96 opacity-0 scale-95 transition-all duration-300">
+            class=" bg-white/70 backdrop-blur-lg p-1  rounded-lg shadow-xl w-96 opacity-0 scale-95 transition-all duration-300">
 
             <h2 class="text-xl text-black text-center font-bold mb-4">Manage Accounts</h2>
             <!-- <p class="text-gray-700 mb-4">This is a simple popup modal using Tailwind CSS and jQuery.</p> -->
@@ -252,13 +242,16 @@ if (!isset($_SESSION['loginId'])) {
 
     <!-- Main Content -->
     <main class="p-3 flex flex-col w-4/5 manageSection changeColor  " is_open="0">
+        <!-- <main
+        class="p-3 flex flex-col w-4/5 manageSection changeColor flex-grow md:w-[200px]w-full ml-0 md:ml-[10%] transition-all duration-300"
+        is_open="0"> -->
         <!-- <div class="flex justify-end  space-x-2"> -->
         <div class="flex justify-between  space-x-2">
             <!-- <div  class="text-xl font-semibold mb-3"> </div> -->
             <div id="activeListName" class="flex items-center text-xl font-semibold mb-3"">
              <i class=" fas fa-sun text-yellow-400 mr-2"></i> My Day
             </div>
-            <div class=" space-x-2">
+            <div class=" space-x-2 ">
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
                         class="fas fa-image"></i></button>
                 <button class="bg-white text-gray-700 p-2 rounded shadow hover:bg-gray-200"><i
@@ -296,12 +289,8 @@ if (!isset($_SESSION['loginId'])) {
             <!-- completetask append this container -->
             <div id="completeTask"> </div>
         </div>
-
-
-
-
         <!-- add task input -->
-        <div class="mt-auto  ">
+        <!-- <div class="mt-auto  ">
             <form class="flex space-x-2" action="./congfig/server.php" method="POST" id="task_form">
                 <input type='hidden' name="taskBtn" value="1">
                 <input type='hidden' name="userid" value="<?php echo $_SESSION['loginId'] ?>">
@@ -313,52 +302,82 @@ if (!isset($_SESSION['loginId'])) {
                     <i class="fas fa-plus"></i>
                 </button>
             </form>
+        </div> -->
+        <div class="  rounded  w-full max-w-6xl  mt-auto">
+            <form action="./congfig/server.php" method="POST" id="task_form">
+
+                <div
+                    class="flex items-center justify-between bg-white px-2 py-2 rounded-sm shadow-sm  taskInputWrapper">
+                    <!-- Left section: Add icon + text input -->
+                    <div class="flex items-center space-x-1 w-full">
+                        <input type='hidden' name="taskBtn" value="1">
+                        <input type='hidden' name="userid" value="<?php echo $_SESSION['loginId'] ?>">
+                        <div
+                            class="w-7 h-7 rounded-full border-2 border-gray-400 mr-3 flex items-center justify-center  circleWrapper">
+                            <button type="submit" id="taskBtn"
+                                class="bg-rose-400 text-white w-7 h-7 rounded-full flex items-center justify-center hover:bg-rose-600 transition hidden ">
+                                <i class="fas fa-plus text-sm"></i>
+                            </button>
+                        </div>
+                        <input type="text" placeholder="Add a task"
+                            class="w-full focus:outline-none bg-transparent text-gray-800 py-2" name="task" id="task">
+                    </div>
+
+                    <!-- Right section: Icons -->
+                    <div class="flex items-center space-x-4 text-gray-600 text-xl ml-4 hidden rightIcons">
+                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+
+                </div>
+            </form>
         </div>
     </main>
     <!--  right click task container contextmenu list-->
-    <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 hidden absolute contextMenu 
+    <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute contextMenu 
                                     border border-gray-300 transition-all duration-200 ease-in-out">
 
         <ul class="text-gray-800 font-medium">
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
             </li>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-lg transition-all duration-300">
+                                        cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
             </li>
         </ul>
 
         <div class="border-t border-gray-400 mt-1 pt-1">
             <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
-                                        from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300"
+                                        from-red-100 to-red-300 cursor-pointer rounded-sm transition-all duration-300"
                 id="delete-btn" data-id="${element.id}">
                 <i class="fa-solid fa-trash mr-3"></i> Delete Task
             </li>
@@ -366,23 +385,23 @@ if (!isset($_SESSION['loginId'])) {
     </div>
     <!-- user manage acount -->
     <div
-        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[50px] left-[10px]   managesection  border border-gray-300 ">
+        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[70px] left-[10px]   manageAcount  border border-gray-300 ">
 
         <ul class="text-gray-800 font-medium ">
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                        cursor-pointer rounded-lg " id="openModal" type="button"><i
+                        cursor-pointer rounded-sm " id="openModal" type="button"><i
                     class="fa-solid  fa-users fa-flip mr-3 text-yellow-500"></i>ManageAccounts
             </li>
             <hr>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                        cursor-pointer rounded-lg  ">
+                        cursor-pointer rounded-sm  ">
                 <i class="fa-solid fa-cog fa-spin mr-3 text-yellow-700"></i> Satting
             </li>
             <hr>
 
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                        cursor-pointer rounded-lg  ">
+                        cursor-pointer rounded-sm  ">
                 <i class="fa-solid fa-sync fa-spin mr-3 text-green-600"></i> Sync
             </li>
         </ul>
@@ -391,36 +410,36 @@ if (!isset($_SESSION['loginId'])) {
     <!-- untitlelist contestmenu......................................................... -->
 
     <div id="listcontextMenu"
-        class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
+        class="hidden absolute bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 border border-gray-300 w-64 transition-all duration-200 ease-in-out">
         <ul class="text-gray-800 font-medium">
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-lg transition-all duration-300 rename-list">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-300 to-blue-300 cursor-pointer rounded-sm transition-all duration-300 rename-list">
                 <i class="fa-solid fa-pen mr-3 text-blue-600"></i> Rename list
             </li>
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-lg transition-all duration-300">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-user-plus mr-3 text-green-600"></i> Share list
             </li>
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-lg transition-all duration-300">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-print mr-3 text-indigo-600"></i> Print list
             </li>
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-lg transition-all duration-300">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-envelope mr-3 text-purple-600"></i> Email list
             </li>
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-lg transition-all duration-300">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-yellow-100 to-yellow-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-thumbtack mr-3 text-yellow-600"></i> Pin to Start
             </li>
             <li
-                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-lg transition-all duration-300">
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-copy mr-3 text-gray-600"></i> Duplicate list
             </li>
         </ul>
         <div class="border-t border-gray-400 mt-1 pt-1">
             <li type="submit"
-                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-lg transition-all duration-300 delete-list">
+                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r from-red-100 to-red-300 cursor-pointer rounded-sm transition-all duration-300 delete-list">
                 <i class="fa-solid fa-trash mr-3"></i> Delete list
             </li>
         </div>
@@ -428,6 +447,10 @@ if (!isset($_SESSION['loginId'])) {
 
     <!-- right sidebar -->
     <div class="fixed top-0 right-0 w-1/5 mx-auto text-black hidden sidebar-btn ">
+
+
+        <!-- <div
+        class="fixed top-0 right-0 sm:w-1/3 md:w-1/3 w-full h-screen text-black hidden sidebar-btn z-50 bg-white shadow-2xl"> -->
         <div class="flex justify-end">
             <div
                 class="w-full max-w-xs h-screen bg-white shadow-2xl  overflow-y-auto  hover:shadow-3xl transition-shadow duration-300">
@@ -492,79 +515,93 @@ if (!isset($_SESSION['loginId'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
+        // Jab pura page load ho jaaye
         $(document).ready(function () {
-            let activeListId = $(".activeList").data("id")
+            // Jo list active hai uska ID le rahe hain
+            let activeListId = $(".activeList").data("id");
+
+            // Us list ke tasks ko fetch kar rahe hain
             getTasks(activeListId);
+
+            // List data ko render kar rahe hain (left sidebar etc.)
             listDataRender();
         });
 
+        // Jab "Add Task" wala button click ho
+        $(document).on("click", ".circleWrapper", function (e) {
+            e.preventDefault(); // Form submit hone se rok rahe hain
 
-        $(document).on("click", "#taskBtn", function (e) {
-            e.preventDefault();
-            let task = $('#task').val().trim();
-
-            // alxxert(task);
-            // return false;
-            let error = 0;
+            let task = $('#task').val().trim(); // Input se task ka value le rahe hain aur trim kar rahe hain (extra space hata ke)
+            let error = 0; // Error ka count shuru mein 0 hai
+            // Agar task input khaali hai to error show karo
             if (task === '') {
-                $('#task').css({
-                    'border': '2px solid red',
-                    'box-shadow': '0px 0px 8px red',
-                    'border-radius': '5px',
-                    'transition': 'all 0.3s ease-in-out'
-                });
-                error++;
-            }
-            $(document).on("keyup", "#task", function (e) {
-                if ($(this).val() !== '') {
-                    $('#task').css({
-                        'border': '',
-                        'box-shadow': '',
-                        'border-radius': '',
-                        'transition': 'all 0.3s ease-in-out'
-                    });
+                // Red border aur shadow se input ko highlight karo
+                if ($('#taskBtn').hasClass('hidden')) {
+                    $('#taskBtn').removeClass('hidden');
+                    $(this).closest('.taskInputWrapper').removeClass('bg-white').addClass('bg-gray-200');
+                } else {
+                    $('#taskBtn').addClass('hidden');
+                    $(this).closest('.taskInputWrapper').addClass('bg-white').removeClass('bg-gray-200');
                 }
-            })
 
+                error++; // Error count badha do
+            }
+            // Jaise hi user kuch type kare, red border hata do agar input khaali nahi hai
+            $(document).on("keyup", "#task", function () {
+                if ($(this).val().trim() !== '') {
+                    $('#taskBtn').addClass('hidden');
+                    $('.taskInputWrapper').removeClass('bg-gray-200').addClass('bg-white');
+                    $('.rightIcons').removeClass('hidden')
+                } else {
+                    $('.rightIcons').addClass('hidden')
+                }
+            });
+
+            // Agar koi error nahi hai to form submit karo
             if (error === 0) {
-                let form = $('#task_form');
-                let url = form.attr('action');
-                let activeListId = $(".activeList").attr("data-id")
-                // alert(activeListId)
+                let form = $('#task_form'); // Form element ko le rahe hain
+                let url = form.attr('action'); // Form ke action URL ko le rahe hain
+                let activeListId = $(".activeList").attr("data-id"); // Active list ka ID le rahe hain
 
-                // return false;
+                let formData = form.serialize(); // Form data ko serialize (string mein convert) kar rahe hain
 
-                let formData = form.serialize();
-
+                // Active list ka ID bhi form data mein jod rahe hain
                 formData += "&activeListId=" + activeListId;
 
+                // Agar "important" list par hain to task ko important mark karo
                 if (activeListId === "important") {
                     formData += "&important=1";
                 }
+
+                // Agar "checked" list par hain to task ko complete mark karo
                 if (activeListId === "checked") {
                     formData += "&checked=1";
                 }
 
-
+                // AJAX call se data server par bhej rahe hain
                 $.ajax({
                     url: url,
                     type: 'POST',
                     data: formData,
                     success: function (response) {
-                        let arr = JSON.parse(response);
-                        console.log(arr);
-                        if (arr.success) {
-                            let listId = $('.activeList').attr('data-id')
+                        let arr = JSON.parse(response); // Server ka response JSON mein convert kar rahe hain
+                        console.log(arr); // Console mein output dekh rahe hain (debug ke liye)
 
-                            getTasks(listId)
+                        if (arr.success) {
+                            // Task successfully add ho gaya to list ko dobara fetch karo
+                            let listId = $('.activeList').attr('data-id');
+                            getTasks(listId);
                         } else {
-                            alert("tasks not updated");
+                            alert("tasks not updated"); // Error message
                         }
+
+                        // Task input field ko empty kar do
                         $('#task').val('');
                     }
-                })
+                });
             }
-        })
+        });
+
         function getTasks(id = "") {
 
             let request = {
@@ -609,6 +646,7 @@ if (!isset($_SESSION['loginId'])) {
 
 
             getTaskList.forEach(element => {
+
                 let isimp = "text-gray-400"
                 // let completeid = $(".checkbox").attr("data-id")
                 if (element.important == "1") {
@@ -641,8 +679,6 @@ if (!isset($_SESSION['loginId'])) {
                 } else if (currentListId == 'complete') {
                     subText = `<div class="text-sm text-gray-500 "></div>`;
                 }
-
-
                 let taskTemplate = `    
                     
                       <div class="flex justify-between bg-white text-black p-1 rounded-sm shadow-sm items-start sidebar mr-5 mt-1 mb-1 removeCheck${element.id} rightClick" data-id="${element.id}">
@@ -650,8 +686,17 @@ if (!isset($_SESSION['loginId'])) {
                                         <!-- Left Side: Checkbox + Task Info -->
                                         <div class="flex items-start space-x-3 w-full max-w-sm">
 
-                                            <!-- Checkbox -->
-                                            <input type="checkbox" class="w-4 h-4 mt-1 checkbox ischeck${element.id}" ${ischeck} data-id="${element.id}" data-check="${element.checked}">
+                                           
+                                            <div class="w-6 h-6 relative rounded-full border-2 border-gray-400 mr-3 flex   mt-1  items-center justify-center">
+                                                <input 
+                                                    type="checkbox" 
+                                                    class=" custom-checkbox appearance-none w-6 h-6 mt-1 rounded-full checkbox checked:border-transparent focus:outline-none cursor-pointer ischeck${element.id}" 
+                                                    ${ischeck} 
+                                                    data-id="${element.id}" 
+                                                    data-check="${element.checked}"
+                                                >
+                                            </div>
+
 
                                             <!-- Task Name + Sub Info -->
                                             <div class="flex flex-col">
@@ -812,49 +857,54 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on('click', 'input[type="checkbox"], .star,.defaultList', function (e) {
             e.stopPropagation();
         });
+        // jb loginUser pe click ho to manageAcount toggle ho
         $(document).on('click', '.loginUser', function () {
-            $('.managesection ').toggle('hidden')
+            $('.manageAcount ').toggle('hidden')
         });
         // **Context menu open logic**..........................................................
         $(document).on('contextmenu', '.rightClick', function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Default right-click menu ko disable kar diya
+
             let menu1 = $(this).find('.contextMenu');
-            // Agar context menu already active hai, to close kar do
+
+            // Agar context menu already active hai, to usko band kar do
             if (menu1.hasClass("active")) {
-                $(".contextMenu").removeClass("active").addClass("hidden");
-                e.stopPropagation();
+                $(".contextMenu").removeClass("active").addClass("hidden"); // Sabhi menus ko hide karo
+                e.stopPropagation(); // Event ko aur aage propagate hone se roko
             } else {
-                //  Sidebar toggle karne ka function call karo
+                // Sidebar toggle karne ka function call karo (agar koi sidebar open/close karna ho)
                 $(".sidebar-btn").toggleClass("open");
             }
 
-            // Pehle sabhi context menus ko hide karo
-            // $(".contextMenu").removeClass("active").addClass("hidden");
-            let itemId = $(this).data("id");
+            // Pehle sabhi context menus ko hide kar do (agar pehle se open ho koi aur)
+            // $(".contextMenu").removeClass("active").addClass("hidden"); // Ye line commented hai abhi
 
-            // Current element ka context menu
-            let menu = $('.contextMenu');
+            let itemId = $(this).data("id"); // Right clicked item ka ID fetch karo
 
-            // Window aur mouse position fetch karo
-            let windowHeight = $(window).height(); // Window ki height
-            let menuHeight = menu.outerHeight(); // Context menu ki height
+            let menu = $('.contextMenu'); // Context menu element
+
+            // Window aur mouse ki position le lo
+            let windowHeight = $(window).height(); // Puri window ki height
+            let menuHeight = menu.outerHeight();   // Context menu ki height
             let clickY = e.pageY; // Mouse click ki Y position
 
-            // Agar bottom me jagah kam hai, to menu UP open hoga
+            // Agar niche jagah kam hai, to menu upar khulega
             let topPosition = (clickY + menuHeight > windowHeight) ? (clickY - menuHeight) : clickY;
 
-            // Context menu show karo correct position pe
+            // Context menu ko show karo sahi position par
             menu.addClass('active').removeClass('hidden').css({
                 top: topPosition + "px",
                 left: e.pageX + "px"
-            }).attr("data-id", itemId);;
-            e.stopPropagation(); // Context menu ka propagation roko
+            }).attr("data-id", itemId); // Us item ka ID bhi attach kar diya
 
+            e.stopPropagation(); // Context menu ka propagation roko taaki dusre elements trigger na ho
         });
+
 
         // **Jab kahi aur click ho, tab context menu band ho jaye**
         $(document).on("click", function () {
             $(".contextMenu").removeClass("active").addClass("hidden");
+
         });
 
         // **Agar rightClick pe click karein to context menu band ho, lekin sidebar toggle ho**
@@ -1098,47 +1148,13 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
-        //defaultList ajax..................................
-        // function renderDefaultList() {
-        //     $.ajax({
-        //         url: "./congfig/server.php",
-        //         type: "post",
-        //         data: {
-        //             getDefaultList: true
-        //         },
-        //         success: function (response) {
-        //             let array = JSON.parse(response);
-        //             console.log(array)
-        //             if (array.success) {
 
-        //                 let defaultList = array.defaultList;
-        //                 // console.log(defaultList)
-        //                 defaultList.map((ele, index) => {
-        //                     let html = `
-        //                                  <li class="p-2  hover:bg-teal-500 cursor-pointer flex items-center mr-2"data-id="${ele.id}">
-        //                                 <i class="${ele.icon_class} mr-2 "></i> ${ele.list_name}</li>
-        //                              `;
-
-
-        //                     console.log($(".defaultList").append(html))
-        //                 })
-
-
-        //             }
-        //         },
-        //         error: function () {
-        //             alert(" getDefaultList AJAX request failed!");
-        //         }
-        //     });
-        // }
         $(document).on("click", ".defaultList ", function () {
             // Pehle sabhi list items se active class hatao
             $(".defaultList").removeClass("activeList bg-rose-500 text-white font-bold");
-
             // Ab jispe click kiya hai usko active class add karo
             $(this).addClass("activeList bg-rose-500 text-white font-bold");
             let Id = $(this).attr("data-id")
-
             getTasks(Id)
             let listid = $(this).attr("data-id")
             if (listid == "complete" || listid == "Assigned") {
@@ -1146,21 +1162,22 @@ if (!isset($_SESSION['loginId'])) {
             } else {
                 $("#task_form").show()
             }
-            let listName = $(this).attr("data-name");
+            // let listName = $(this).attr("data-name");
             let iconClass = $(this).attr("data-icon");
             // alert(iconClass);
-            $("#activeListName").html(` <i class="${iconClass}"></i> ${listName}`);
-
+            $("#activeListName").html(` <i class="${iconClass}"> </i>${Id} `);
             let randomColor = getRandomColor();
             $('.changeColor').css('background-color', randomColor);
+            document.documentElement.style.setProperty('--checkbox-color', randomColor);
             function getRandomColor() {
                 let letters = '0123456789ABCDEF';
                 let color = '#';
                 for (let i = 0; i < 6; i++) {
                     color += letters[Math.floor(Math.random() * 16)];
                 }
-                let opacityHex = '66'; // 40% opacity (66 in hex)
-                return color + opacityHex;
+                let opacityHex = '80'; // 40% opacity (66 in hex)
+                // return color + opacityHex;   
+                return color
             }
 
 
@@ -1260,7 +1277,7 @@ if (!isset($_SESSION['loginId'])) {
         $(document).ready(function () {
             // Open Modal
             $("#openModal").click(function () {
-                $(".managesection").css('display', 'none')
+                $(".manageAcount").css('display', 'none')
                 $("#modalBg").removeClass("hidden"); // Show background
                 $("#modalBox").removeClass("opacity-0 scale-95").addClass("opacity-100 scale-100"); // Animate modal
             });
@@ -1272,6 +1289,23 @@ if (!isset($_SESSION['loginId'])) {
                 setTimeout(() => $("#modalBg").addClass("hidden"), 300); // Hide background after animation
             });
         });
+
+        $(document).ready(function () {
+            $('#toggleSidebar').click(function () {
+                $('#leftSidebar').toggleClass('-translate-x-full');
+            });
+
+            // Optional: Close sidebar if user clicks outside it (on small screens)
+            $(document).click(function (e) {
+                if ($(window).width() <= 768) {
+                    if (!$(e.target).closest('#leftSidebar, #toggleSidebar').length) {
+                        $('#leftSidebar').addClass('-translate-x-full');
+                    }
+                }
+            });
+        });
+
+
 
 
 

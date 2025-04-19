@@ -34,7 +34,7 @@ if (!isset($_SESSION['loginId'])) {
     <!-- <body class="bg-gray-200 text-white min-h-screen flex box-border"> -->
     <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav
-        class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white  ">
+        class="w-1/5 h-screen overflow-hidden  bg-teal-700 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white   ">
         <div class="flex items-center space-x-3  loginUser  ">
             <div
                 class=" border-b-amber-800 border h-10 w-10 text-center bg-orange-400 font-bold rounded-full text-2xl text-white">
@@ -55,19 +55,19 @@ if (!isset($_SESSION['loginId'])) {
 
             <ul class="text-gray-800 font-medium ">
                 <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                    cursor-pointer rounded-lg " id="openModal" type="button"><i
+                            cursor-pointer rounded-lg " id="openModal" type="button"><i
                         class="fa-solid  fa-users fa-flip mr-3 text-yellow-500"></i>ManageAccounts
                 </li>
                 <hr>
 
                 <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                    cursor-pointer rounded-lg  ">
+                            cursor-pointer rounded-lg  ">
                     <i class="fa-solid fa-cog fa-spin mr-3 text-yellow-700"></i> Satting
                 </li>
                 <hr>
 
                 <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                    cursor-pointer rounded-lg  ">
+                            cursor-pointer rounded-lg  ">
                     <i class="fa-solid fa-sync fa-spin mr-3 text-green-600"></i> Sync
                 </li>
             </ul>
@@ -103,8 +103,8 @@ if (!isset($_SESSION['loginId'])) {
         <ul class="custom-lists space-y-2 overflow-y-auto max-h-60  ">
         </ul>
         <!-- <li class="p-2 rounded  hover:bg-teal-500 cursor-pointer  flex items-center ">
-            <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
-        </li> -->
+                    <i class="fa-solid fa-bars text-gray-400 mr-2"></i>Untitled list
+                </li> -->
         </ul>
 
         <!-- untitlelist contestmenu......................................................... -->
@@ -145,12 +145,12 @@ if (!isset($_SESSION['loginId'])) {
             </div>
         </div>
         <!-- <button class="mt-auto bg-teal-600 hover:bg-teal-500 text-white py-2 px-4  flex items-center justify-center"
-            id="new-list-btn">
-            <i class="fas fa-plus mr-2"></i> New List
-        </button> -->
+                    id="new-list-btn">
+                    <i class="fas fa-plus mr-2"></i> New List
+                </button> -->
         <button class="relative mt-auto group bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold     py-2 px-8 rounded-md 
-            transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
-            border border-white/20 backdrop-blur-xl overflow-hidden mr-2 flex items-center justify-center"
+                    transition-all duration-300 transform hover:shadow-lg hover:shadow-cyan-400/60 active:scale-95 
+                    border border-white/20 backdrop-blur-xl overflow-hidden mr-2 flex items-center justify-center"
             id="new-list-btn">
             <span class="absolute inset-0 bg-white opacity-10 group-hover:opacity-20 rounded-sm"></span>
             <span class="relative flex items-center justify-center space-x-2">
