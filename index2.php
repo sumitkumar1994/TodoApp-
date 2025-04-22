@@ -35,7 +35,7 @@ if (!isset($_SESSION['loginId'])) {
     <!-- Left Sidebar --------------------------------------------------------------------------->
     <nav class="w-1/5 h-screen overflow-hidden  bg-pink-900 pl-2  pt-3 flex flex-col space-y-4 border-r border-white  ">
         <!-- <nav class="w-1/5 h-screen overflow-hidden bg-pink-900 pl-2 pt-3 pb-4 flex flex-col space-y-4 border-r border-white transition-all duration-300 
-    max-md:fixed max-md:left-0 max-md:top-0 max-md:z-50 max-md:w-64 max-md:-translate-x-full" id="leftSidebar"> -->
+     max-md:fixed max-md:left-0 max-md:top-0 max-md:z-50 max-md:w-64 max-md:-translate-x-full" id="leftSidebar"> -->
 
         <!-- <button id="toggleSidebar"
             class="md:hidden fixed top-4 left-0 z-50 bg-white text-black p-2 rounded shadow hover:bg-gray-200">
@@ -241,7 +241,7 @@ if (!isset($_SESSION['loginId'])) {
 
 
     <!-- Main Content -->
-    <main class="p-3 flex flex-col w-4/5 manageSection changeColor  " is_open="0">
+    <main class="p-3 flex flex-col w-4/5 manageSection changeColor  opacity-100  " is_open="0">
         <!-- <main
         class="p-3 flex flex-col w-4/5 manageSection changeColor flex-grow md:w-[200px]w-full ml-0 md:ml-[10%] transition-all duration-300"
         is_open="0"> -->
@@ -264,7 +264,7 @@ if (!isset($_SESSION['loginId'])) {
         </div>
         <!-- task container -->
         <div class="mt-1 max-h-[82vh] overflow-auto" id="taskListscrollbar">
-            <div class="" id="taskListContainer">
+            <div class=" " id="taskListContainer">
                 <!-- <div class=" mt-4 overflow-y-auto max-h-[550px]" id="taskListContainer"> -->
 
                 <!-- <div class="flex justify-between bg-white text-black p-3 rounded shadow items-center">
@@ -313,9 +313,9 @@ if (!isset($_SESSION['loginId'])) {
                         <input type='hidden' name="taskBtn" value="1">
                         <input type='hidden' name="userid" value="<?php echo $_SESSION['loginId'] ?>">
                         <div
-                            class="w-7 h-7 rounded-full border-2 border-gray-400 mr-3 flex items-center justify-center  circleWrapper">
+                            class="w-7 h-7 rounded-full border-2 border-gray-400 mr-3 flex items-center justify-center  taskBtnWrapper">
                             <button type="submit" id="taskBtn"
-                                class="bg-rose-400 text-white w-7 h-7 rounded-full flex items-center justify-center hover:bg-rose-600 transition hidden ">
+                                class="bg-rose-400 text-white w-5 h-5 rounded-full flex items-center justify-center hover:bg-rose-600 transition hidden ">
                                 <i class="fas fa-plus text-sm"></i>
                             </button>
                         </div>
@@ -324,7 +324,12 @@ if (!isset($_SESSION['loginId'])) {
                     </div>
 
                     <!-- Right section: Icons -->
-                    <div class="flex items-center space-x-4 text-gray-600 text-xl ml-4 hidden rightIcons">
+                    <div class="flex items-center space-x-4 text-gray-600 text-xl ml-4 hidden rightIcons ">
+                        <div class="flex items-center space-x-1 px-2 py-2 hover:bg-gray-100">
+                            <i class="fas fa-home"></i>
+                            <span class="text-sm">Tasks</span>
+                        </div>
+
                         <i class="fas fa-calendar-alt"></i>
                         <i class="fas fa-clock"></i>
                         <i class="fas fa-sync-alt"></i>
@@ -335,49 +340,49 @@ if (!isset($_SESSION['loginId'])) {
         </div>
     </main>
     <!--  right click task container contextmenu list-->
-    <div class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute contextMenu 
-                                    border border-gray-300 transition-all duration-200 ease-in-out">
+    <div
+        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute contextMenu border border-gray-300 transition-all duration-200 ease-in-out">
 
         <ul class="text-gray-800 font-medium">
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-star mr-3 text-yellow-500"></i> Remove from My Day
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-yellow-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-star-half-stroke mr-3 text-yellow-500"></i> Mark as Important
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-green-100 to-green-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-check mr-3 text-green-600"></i> Mark as Completed
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-indigo-100 to-indigo-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-day mr-3 text-indigo-600"></i> Due Tomorrow
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-purple-100 to-purple-300  cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-alt mr-3 text-purple-600"></i> Pick a Date
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300  cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-calendar-xmark mr-3 text-gray-600"></i> Remove Due Date
             </li>
 
-            <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 
-                                        cursor-pointer rounded-sm transition-all duration-300">
+            <li
+                class="flex items-center p-2 hover:bg-gradient-to-r from-gray-100 to-gray-300 cursor-pointer rounded-sm transition-all duration-300">
                 <i class="fa-solid fa-folder-open mr-3 text-gray-600"></i> Move Task To...
             </li>
         </ul>
 
         <div class="border-t border-gray-400 mt-1 pt-1">
-            <li type="submit" class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r 
-                                        from-red-100 to-red-300 cursor-pointer rounded-sm transition-all duration-300"
+            <li type="submit"
+                class="flex items-center p-2 text-red-600 hover:bg-gradient-to-r   from-red-100 to-red-300 cursor-pointer rounded-sm transition-all duration-300"
                 id="delete-btn" data-id="${element.id}">
                 <i class="fa-solid fa-trash mr-3"></i> Delete Task
             </li>
@@ -446,11 +451,11 @@ if (!isset($_SESSION['loginId'])) {
     </div>
 
     <!-- right sidebar -->
-    <div class="fixed top-0 right-0 w-1/5 mx-auto text-black hidden sidebar-btn ">
+    <div class="fixed top-0 right-0 w-1/5 mx-auto text-black hidden sidebar-Menu ">
 
 
         <!-- <div
-        class="fixed top-0 right-0 sm:w-1/3 md:w-1/3 w-full h-screen text-black hidden sidebar-btn z-50 bg-white shadow-2xl"> -->
+        class="fixed top-0 right-0 sm:w-1/3 md:w-1/3 w-full h-screen text-black hidden sidebar-Menu z-50 bg-white shadow-2xl"> -->
         <div class="flex justify-end">
             <div
                 class="w-full max-w-xs h-screen bg-white shadow-2xl  overflow-y-auto  hover:shadow-3xl transition-shadow duration-300">
@@ -519,16 +524,13 @@ if (!isset($_SESSION['loginId'])) {
         $(document).ready(function () {
             // Jo list active hai uska ID le rahe hain
             let activeListId = $(".activeList").data("id");
-
             // Us list ke tasks ko fetch kar rahe hain
             getTasks(activeListId);
-
             // List data ko render kar rahe hain (left sidebar etc.)
             listDataRender();
         });
-
-        // Jab "Add Task" wala button click ho
-        $(document).on("click", ".circleWrapper", function (e) {
+        // Jab "Add Task" wala button  ke div pe click ho
+        $(document).on("click", ".taskBtnWrapper", function (e) {
             e.preventDefault(); // Form submit hone se rok rahe hain
 
             let task = $('#task').val().trim(); // Input se task ka value le rahe hain aur trim kar rahe hain (extra space hata ke)
@@ -538,25 +540,14 @@ if (!isset($_SESSION['loginId'])) {
                 // Red border aur shadow se input ko highlight karo
                 if ($('#taskBtn').hasClass('hidden')) {
                     $('#taskBtn').removeClass('hidden');
-                    $(this).closest('.taskInputWrapper').removeClass('bg-white').addClass('bg-gray-200');
+                    $(this).closest('.taskInputWrapper').removeClass('bg-white').addClass('bg-gray-300');
                 } else {
                     $('#taskBtn').addClass('hidden');
-                    $(this).closest('.taskInputWrapper').addClass('bg-white').removeClass('bg-gray-200');
+                    $(this).closest('.taskInputWrapper').addClass('bg-white').removeClass('bg-gray-300');
                 }
 
                 error++; // Error count badha do
             }
-            // Jaise hi user kuch type kare, red border hata do agar input khaali nahi hai
-            $(document).on("keyup", "#task", function () {
-                if ($(this).val().trim() !== '') {
-                    $('#taskBtn').addClass('hidden');
-                    $('.taskInputWrapper').removeClass('bg-gray-200').addClass('bg-white');
-                    $('.rightIcons').removeClass('hidden')
-                } else {
-                    $('.rightIcons').addClass('hidden')
-                }
-            });
-
             // Agar koi error nahi hai to form submit karo
             if (error === 0) {
                 let form = $('#task_form'); // Form element ko le rahe hain
@@ -599,6 +590,21 @@ if (!isset($_SESSION['loginId'])) {
                         $('#task').val('');
                     }
                 });
+            }
+        });
+        // Jaise hi user kuch type kare, red border hata do agar input khaali nahi hai
+        $(document).on("keyup focus", "#task", function () {
+            if ($(this).val().trim() !== '') {
+                $('#taskBtn').addClass('hidden');
+                $('.taskInputWrapper').removeClass('bg-gray-300').addClass('bg-white');
+                $('.rightIcons').removeClass('hidden')
+            } else {
+                $('.rightIcons').addClass('hidden')
+            }
+            //  Jab user input field pe click (focus) kare aur taskBtn dikh raha ho, toh usse hide karo
+            if (!$('#taskBtn').hasClass('hidden')) {
+                $('#taskBtn').addClass('hidden');
+                $('.taskInputWrapper').removeClass('bg-gray-300').addClass('bg-white');
             }
         });
 
@@ -681,10 +687,10 @@ if (!isset($_SESSION['loginId'])) {
                 }
                 let taskTemplate = `    
                     
-                      <div class="flex justify-between bg-white text-black p-1 rounded-sm shadow-sm items-start sidebar mr-5 mt-1 mb-1 removeCheck${element.id} rightClick" data-id="${element.id}">
+                      <div class=" flex justify-between bg-white  text-black p-1 rounded-sm shadow-sm items-start sidebar mr-5 mt-1 mb-1 removeCheck${element.id} rightClick" data-id="${element.id}">
 
                                         <!-- Left Side: Checkbox + Task Info -->
-                                        <div class="flex items-start space-x-3 w-full max-w-sm">
+                                        <div class="flex items-start space-x-3 w-full max-w-sm ">
 
                                            
                                             <div class="w-6 h-6 relative rounded-full border-2 border-gray-400 mr-3 flex   mt-1  items-center justify-center">
@@ -815,8 +821,19 @@ if (!isset($_SESSION['loginId'])) {
                                     timer: 2000, // Auto-close after 2 seconds
                                     showConfirmButton: false
                                 });
-                                // $('#taskListContainer').empty();
-                                // alert($('#taskListContainer').empty());
+                                //  Close sidebar if open
+                                activeTaskId === taskid
+                                if (activeTaskId === taskid) {
+                                    if ($(".manageSection").attr("is_open") === "1") {
+                                        $(".sidebar-Menu").fadeOut();
+                                        $(".manageSection")
+                                            .removeClass("w-3/5")
+                                            .addClass("w-4/5")
+                                            .attr("is_open", "0");
+                                        $('.sidebar').removeClass('bg-gray-200').addClass('bg-white');
+                                        activeTaskId = null;
+                                    }
+                                }
                                 let activeList = $('.activeList').attr('data-id');
                                 getTasks(activeList); // Refresh task list
                             } else {
@@ -831,27 +848,60 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
-        // right sidebar logic ...................................................................................
-
+        // right sidebar logic .........................................
+        // Active task ID ko globally store karne ke liye variable
+        let activeTaskId = null; // Store currently active task's ID
+        // Jab kisi task (sidebar element) par click hota hai
         $(document).on('click', '.sidebar', function (e) {
-            // Agar context menu active hai to sidebar event trigger na ho
+            // Agar context menu active hai, fristclick pe comtextMenu ko close 
             if ($(".contextMenu").hasClass("active")) {
-                return false;
+                $(".contextMenu").removeClass("active").addClass("hidden");
+                return;
             }
-            // right sidebar open krne ke liye 
-            $(".sidebar-btn").fadeToggle();
-
+            // Current clicked task ka ID lo
+            const clickedId = $(this).attr("data-id");
+            // Sidebar ka current state (open/close) check karo
             let is_open = $('.manageSection').attr("is_open");
-
-
+            // Agar sidebar abhi band hai
             if (is_open == "0") {
+                // Sidebar ko dikhayein
+                $(".sidebar-Menu").fadeIn();
+                // Sidebar width chhoti karo aur status update karo
                 $(".manageSection").removeClass("w-4/5").addClass("w-3/5").attr("is_open", "1");
-            } else {
-                $(".manageSection").removeClass("w-3/5").addClass("w-4/5").attr("is_open", "0");
-            }
+                // Pehle sabhi tasks ko white background do
+                $('.sidebar').removeClass('bg-gray-200').addClass('bg-white');
+                // Clicked task ko gray background do (highlight)
+                $(this).removeClass('bg-white').addClass('bg-gray-200');
+                // Active task ID set karo
+                activeTaskId = clickedId;
 
-            e.stopPropagation(); // Sidebar ke andar click ka propagation roko
+            } else {
+                // Agar sidebar already open hai
+                if (activeTaskId === clickedId) {
+                    // Agar wahi task dobara click kiya gaya
+                    // Sidebar ko hide karo
+                    $(".sidebar-Menu").fadeOut();
+                    // Sidebar width wapas original karo aur status update
+                    $(".manageSection").removeClass("w-3/5").addClass("w-4/5")
+                        .attr("is_open", "0");
+                    // Sabhi tasks ko white background do
+                    $('.sidebar').removeClass('bg-gray-200').addClass('bg-white');
+                    // Active task ID reset karo
+                    activeTaskId = null;
+                } else {
+                    // Agar kisi aur task par click kiya gaya
+                    // Sabhi tasks ko white background do
+                    $('.sidebar').removeClass('bg-gray-200').addClass('bg-white');
+                    // Clicked task ko highlight karo
+                    $(this).removeClass('bg-white').addClass('bg-gray-200');
+                    // Active task ID update karo
+                    activeTaskId = clickedId;
+                }
+            }
+            // Click ka propagation roko taaki kisi outer element par click event na jaaye
+            e.stopPropagation();
         });
+
 
         // **Checkbox aur delete button click pe sidebar event na ho**
         $(document).on('click', 'input[type="checkbox"], .star,.defaultList', function (e) {
@@ -873,7 +923,7 @@ if (!isset($_SESSION['loginId'])) {
                 e.stopPropagation(); // Event ko aur aage propagate hone se roko
             } else {
                 // Sidebar toggle karne ka function call karo (agar koi sidebar open/close karna ho)
-                $(".sidebar-btn").toggleClass("open");
+                $(".sidebar-Menu").toggleClass("open");
             }
 
             // Pehle sabhi context menus ko hide kar do (agar pehle se open ho koi aur)
@@ -905,6 +955,7 @@ if (!isset($_SESSION['loginId'])) {
         $(document).on("click", function () {
             $(".contextMenu").removeClass("active").addClass("hidden");
 
+
         });
 
         // **Agar rightClick pe click karein to context menu band ho, lekin sidebar toggle ho**
@@ -916,7 +967,7 @@ if (!isset($_SESSION['loginId'])) {
         //         $(".contextMenu").removeClass("active").addClass("hidden");
         //     } else {
         //         //  Sidebar toggle karne ka function call karo
-        //         $(".sidebar-btn").toggleClass("open");
+        //         $(".sidebar-Menu").toggleClass("open");
         //     }
 
         //     e.stopPropagation();
@@ -1175,7 +1226,7 @@ if (!isset($_SESSION['loginId'])) {
                 for (let i = 0; i < 6; i++) {
                     color += letters[Math.floor(Math.random() * 16)];
                 }
-                let opacityHex = '80'; // 40% opacity (66 in hex)
+                // let opacityHex = '80'; // 40% opacity (66 in hex)
                 // return color + opacityHex;   
                 return color
             }
