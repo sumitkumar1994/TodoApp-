@@ -203,3 +203,8 @@
   justify-content: center;
   line-height: 1;
 }
+#tomorrowIcon {
+  /* Adjust size as needed */
+  /* color: #555; Change color if needed */
+  background: none; /* Ensures no background color */
+}

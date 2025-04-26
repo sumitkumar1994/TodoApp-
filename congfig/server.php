@@ -205,8 +205,6 @@ if (isset($_POST["taskBtn"])) {
     $checked = $_POST["checked"] ?? '';
 
 
-
-
     $errorcount = 0;
     // $returndata = [];
     $returndata["success"] = false;

@@ -324,21 +324,106 @@ if (!isset($_SESSION['loginId'])) {
                     </div>
 
                     <!-- Right section: Icons -->
-                    <div class="flex items-center space-x-4 text-gray-600 text-xl ml-4 hidden rightIcons ">
-                        <div class="flex items-center space-x-1 px-2 py-2 hover:bg-gray-100">
+                    <div class="flex items-center space-x-1 text-gray-600 text-xl ml-4 hidden rightIcons ">
+
+                        <!-- right icon: task box -->
+                        <div class="flex items-center space-x-1 px-2 py-2 hover:bg-gray-200 relative rounded-sm"
+                            id="task_Icon">
                             <i class="fas fa-home"></i>
                             <span class="text-sm">Tasks</span>
+                            <div id="taskBox"
+                                class="w-64 min-h-8 bg-white text-gray-500 px-2 py-2  overflow-hidden absolute bottom-full mb-3 left-[-61px] hidden  rounded-sm">
+                                <div class="flex items-center space-x-2 ">
+                                    <i class="fas fa-home"></i>
+                                    <span class="text-sm">Tasks</span>
+                                </div>
+                                <div id="taskContent" class="space-y-2 mt-2">
+                                    <!-- Tasks will be appended here -->
+                                </div>
+                            </div>
                         </div>
+                        <!-- right icon calander box -->
+                        <div class="flex items-center space-x-1 px-2 py-2 hover:bg-gray-200  relative  rounded-sm"
+                            id="clenderIcon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span class="hidden"></span>
 
-                        <i class="fas fa-calendar-alt"></i>
-                        <i class="fas fa-clock"></i>
-                        <i class="fas fa-sync-alt"></i>
+                            <div id="clenderBox"
+                                class="w-64 min-h-8 bg-white text-gray-500 mt-1 px-2 py-2  overflow-hidden absolute bottom-full mb-3 left-[-139px] rounded-sm hidden">
+                                <div class="flex justify-between items-center space-x-2 py-2 px-2 hover:bg-gray-300 ">
+                                    <div>
+                                        <i class="fas fa-calendar-day" id="todayIcon"></i>
+                                        <span class="text-sm">Today</span>
+                                    </div>
+                                    <div class="text-sm"><span><?php echo date("l"); ?></span></div>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center space-x-2 py-2 px-2 mt-3 hover:bg-gray-300">
+                                    <div>
+                                        <i class="fas fa-calendar-plus" id="tomorrowIcon"></i>
+                                        <span class="text-sm">Tomorrow</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        <span><?php echo date('l', strtotime('+1 day')); ?></span>
+                                    </div>
+
+                                </div>
+                                <div
+                                    class="flex justify-between items-center space-x-2 py-2 px-2 mt-3 hover:bg-gray-300">
+                                    <div>
+                                        <i class="fas fa-calendar-week" id="nextWeekIcon"></i>
+                                        <span class="text-sm">Next week</span>
+                                    </div>
+
+                                    <div class="text-sm">
+                                        <span><?php echo date('l', strtotime('+1 week')); ?></span>
+                                    </div>
+                                </div>
+                                <hr class=" mt-3">
+                                <div class="flex items-center space-x-2 py-2 px-2 mt-3 hover:bg-gray-300" id="pickDate">
+                                    <i class="fas fa-calendar-alt" id="pickDateIcon"></i>
+                                    <span class="text-sm ">Pick a date</span>
+                                    <input type="date" id="dateInput" placeholder="Date a picker"
+                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="flex items-center space-x-1 px-2 py-2  hover:bg-gray-200  relative  rounded-sm"
+                            id="pickdateIcon">
+                            <i class="fas fa-clock"></i>
+                            <div id="pickdateBox"
+                                class="w-64 min-h-8 bg-white text-gray-500 mt-1 px-2 py-2  overflow-hidden absolute bottom-full mb-3 left-[-176px] rounded-sm hidden ">
+
+                                <div class="flex items-center space-x-2 py-2 px-2 hover:bg-gray-300 ">
+                                    <i class="fas fa-clock later-icon"></i>
+                                    <span class="text-sm">Later today</span>
+                                </div>
+                                <div class="flex items-center space-x-2 py-2 px-2 hover:bg-gray-300 ">
+                                    <i class="fas fa-calendar-plus "></i>
+                                    <span class="text-sm" id="tomorrowIcon">Tomorrow</span>
+                                </div>
+                                <div class="flex items-center space-x-2 py-2 px-2 hover:bg-gray-300 ">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="text-sm" id="tomorrowIcon">Pick a date & time</span>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="flex items-center space-x-1 px-2 py-2 hover:bg-gray-100">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
                     </div>
-
                 </div>
             </form>
         </div>
     </main>
+
     <!--  right click task container contextmenu list-->
     <div
         class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute contextMenu border border-gray-300 transition-all duration-200 ease-in-out">
@@ -390,7 +475,7 @@ if (!isset($_SESSION['loginId'])) {
     </div>
     <!-- user manage acount -->
     <div
-        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[70px] left-[10px]   manageAcount  border border-gray-300 ">
+        class="w-64 bg-white/70 backdrop-blur-lg shadow-2xl rounded-sm p-2 hidden absolute top-[65px] left-[20px]   manageAcount  border border-gray-300 ">
 
         <ul class="text-gray-800 font-medium ">
             <li class="flex items-center p-2 hover:bg-gradient-to-r from-gray-400 to-yellow-300 
@@ -484,7 +569,7 @@ if (!isset($_SESSION['loginId'])) {
                         <i class="fa fa-calendar mr-2"></i> Add due date
                     </div>
                     <div class="flex items-center px-2 py-2 hover:bg-gray-300 cursor-pointer transition">
-                        <i class="fa fa-redo mr-2"></i> Repeat
+                        <i class="fa fa-redo mr-2 translate-"></i> Repeat
                     </div>
                 </div>
 
@@ -667,7 +752,7 @@ if (!isset($_SESSION['loginId'])) {
                 }
                 let taskNameSpan;
                 if (ischeck === "checked") {
-                    taskNameSpan = "line-through leading-tight "
+                    taskNameSpan = "line-through text-red-500 leading-tight "
                 } else {
                     taskNameSpan = ""
                 }
@@ -908,8 +993,24 @@ if (!isset($_SESSION['loginId'])) {
             e.stopPropagation();
         });
         // jb loginUser pe click ho to manageAcount toggle ho
-        $(document).on('click', '.loginUser', function () {
-            $('.manageAcount ').toggle('hidden')
+        $(document).on('click', '.loginUser', function (e) {
+            e.stopPropagation();
+            if ($(".manageAcount").hasClass("hidden")) {
+                $(".manageAcount").removeClass("hidden").hide().slideDown(200);
+            } else {
+                $(".manageAcount").slideUp(200, function () {
+                    $(".manageAcount").addClass("hidden");
+                });
+            }
+        });
+        // Jab kahin aur click kare to manageAcount box band karo
+        $(document).on('click', function () {
+            if (!$(".manageAcount").hasClass("hidden")) {
+                $(".manageAcount").slideUp(200, function () {
+                    $(".manageAcount").addClass("hidden");
+                });
+            }
+
         });
         // **Context menu open logic**..........................................................
         $(document).on('contextmenu', '.rightClick', function (e) {
@@ -1355,11 +1456,6 @@ if (!isset($_SESSION['loginId'])) {
                 }
             });
         });
-
-
-
-
-
         // rename-list jquary with ajax............................................................................
 
         // $(document).on("click", ".rename-list", function () {
@@ -1463,7 +1559,116 @@ if (!isset($_SESSION['loginId'])) {
         // })
 
         // })
+
+
+        $(document).on("click", "#task_Icon, #clenderIcon, #pickdateIcon", function (e) {
+            e.stopPropagation();
+            const clickedId = $(this).attr("id");
+            const $taskBox = $("#taskBox");
+            const $clenderBox = $("#clenderBox");
+            const $pickdateBox = $("#pickdateBox");
+            if (clickedId === "task_Icon") {
+                // Task icon click hua
+                if ($taskBox.hasClass("hidden")) {
+                    // Pehle calendar box close karo agar open ho
+                    if (!$clenderBox.hasClass("hidden")) {
+                        $clenderBox.slideUp(200, function () {
+                            $clenderBox.addClass("hidden");
+                        });
+                    }
+                    if (!$pickdateBox.hasClass("hidden")) {
+                        $pickdateBox.slideUp(200, function () {
+                            $pickdateBox.addClass("hidden");
+                        });
+                    }
+                    $taskBox.removeClass("hidden").hide().slideDown(200);
+                } else {
+                    $taskBox.slideUp(200, function () {
+                        $taskBox.addClass("hidden");
+                    });
+                }
+            } else if (clickedId === "clenderIcon") {
+                // Calendar icon click hua
+                if ($clenderBox.hasClass("hidden")) {
+                    // Pehle task box close karo agar open ho
+                    if (!$taskBox.hasClass("hidden")) {
+                        $taskBox.slideUp(200, function () {
+                            $taskBox.addClass("hidden");
+                        });
+                    }
+                    if (!$pickdateBox.hasClass("hidden")) {
+                        $pickdateBox.slideUp(200, function () {
+                            $pickdateBox.addClass("hidden");
+                        });
+                    }
+                    $clenderBox.removeClass("hidden").hide().slideDown(200);
+                } else {
+                    $clenderBox.slideUp(200, function () {
+                        $clenderBox.addClass("hidden");
+                    });
+                }
+            } else if (clickedId === "pick&dateIcon") {
+                if ($pick & dateBox.hasClass("hidden")) {
+                    // Pehle task box close karo agar open ho
+                    if (!$taskBox.hasClass("hidden")) {
+                        $taskBox.slideUp(200, function () {
+                            $taskBox.addClass("hidden");
+                        });
+                    }
+                    $clenderBox.removeClass("hidden").hide().slideDown(200);
+                }
+            } else if (clickedId === "pickdateIcon") {
+                if ($pickdateBox.hasClass("hidden")) {
+                    if (!$taskBox.hasClass("hidden")) {
+                        $taskBox.slideUp(200, function () {
+                            $taskBox.addClass("hidden");
+                        });
+                    }
+                    if (!$clenderBox.hasClass("hidden")) {
+                        $clenderBox.slideUp(200, function () {
+                            $clenderBox.addClass("hidden");
+                        });
+                    }
+                    $pickdateBox.removeClass("hidden").hide().slideDown(200);
+                } else {
+                    $pickdateBox.slideUp(200, function () {
+                        $pickdateBox.addClass("hidden");
+                    });
+                }
+            }
+        });
+        // Jab document ya body pe click kare to sab box close karo
+        $(document).on("click", function () {
+            closeAll();
+        });
+        // Common function sabko band karne ke liye
+        function closeAll() {
+            const $taskBox = $("#taskBox");
+            const $clenderBox = $("#clenderBox");
+            const $pickdateBox = $("#pickdateBox");
+
+            if (!$taskBox.hasClass("hidden")) {
+                $taskBox.slideUp(200, function () {
+                    $taskBox.addClass("hidden");
+                });
+            }
+            if (!$clenderBox.hasClass("hidden")) {
+                $clenderBox.slideUp(200, function () {
+                    $clenderBox.addClass("hidden");
+                });
+            }
+            if (!$pickdateBox.hasClass("hidden")) {
+                $pickdateBox.slideUp(200, function () {
+                    $pickdateBox.addClass("hidden");
+                });
+            }
+        }
+
+
+
+
     </script>
+
 
 </body>
 
